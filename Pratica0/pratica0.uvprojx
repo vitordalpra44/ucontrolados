@@ -385,9 +385,9 @@
           <GroupName>Source Group 1</GroupName>
           <Files>
             <File>
-              <FileName>fib.s</FileName>
+              <FileName>pratica0.s</FileName>
               <FileType>2</FileType>
-              <FilePath>.\src\fib.s</FilePath>
+              <FilePath>.\src\pratica0.s</FilePath>
             </File>
             <File>
               <FileName>startup.s</FileName>
