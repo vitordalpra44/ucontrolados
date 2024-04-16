@@ -60,7 +60,8 @@ START
 	
 	
 	;setando os bits de R0 que vão aparecer nos leds/display
-	BL Set_0
+	mov R0, #2_00111111
+	BL SetOutputBits
 	
 	mov R0, #2;imprimindo no Display 1
 	bl SwitchPB4_PB5_PP5

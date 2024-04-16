@@ -1,10 +1,10 @@
---cpu=Cortex-M4.fp.sp
+--cpu Cortex-M4.fp
 ".\objects\startup.o"
-".\objects\pratica0.o"
-".\objects\gpio.o"
 ".\objects\utils.o"
 ".\objects\gpio_modificado.o"
+".\objects\decoder.o"
+".\objects\pratica1.o"
 --strict --scatter ".\Objects\pratica1.sct"
---summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list ".\Listings\pratica1.map" -o .\Objects\pratica1.axf

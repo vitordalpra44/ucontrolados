@@ -1,0 +1,311 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         ; pratica0.s
+    2 00000000         ; Desenvolvido para a placa EK-TM4C1294XL
+    3 00000000         ; VItor DalprÃ¡ / Gabriel Willig / Joï¿½o Mendes
+    4 00000000         ; 24/03/2024
+    5 00000000         ; Feito com base no exemplo.s do professor Guilherme de 
+                       Santi Peron de Sistemas Microcontrolados da UTFPR.
+    6 00000000         
+    7 00000000         
+    8 00000000         
+    9 00000000         
+   10 00000000         ; ------------------------------------------------------
+                       -------------------------
+   11 00000000                 THUMB                        ; Instruï¿½ï¿½es do
+                                                             tipo Thumb-2
+   12 00000000         ; ------------------------------------------------------
+                       -------------------------
+   13 00000000         ; Declaraï¿½ï¿½es EQU - Defines
+   14 00000000         ;<NOME>         EQU <VALOR>
+   15 00000000         
+   16 00000000         ; ------------------------------------------------------
+                       -------------------------
+   17 00000000         ; ï¿½rea de Dados - Declaraï¿½ï¿½es de variï¿½veis
+   18 00000000                 AREA             DATA, ALIGN=2
+   19 00000000         
+   20 00000000         
+   21 00000000         
+   22 00000000         ; Se alguma variï¿½vel for chamada em outro arquivo
+   23 00000000         ;EXPORT  <var> [DATA,SIZE=<tam>]   ; Permite chamar a va
+                       riï¿½vel <var> a 
+   24 00000000         ; partir de outro arquivo
+   25 00000000         ;<var> SPACE <tam>                        ; Declara uma 
+                       variï¿½vel de nome <var>
+   26 00000000         ; de <tam> bytes a partir da primeira 
+   27 00000000         ; posiï¿½ï¿½o da RAM  
+   28 00000000         
+   29 00000000         ; ------------------------------------------------------
+                       -------------------------
+   30 00000000         ; ï¿½rea de Cï¿½digo - Tudo abaixo da diretiva a seguir 
+                       serï¿½ armazenado na memï¿½ria de 
+   31 00000000         ;                  cï¿½digo
+   32 00000000                 AREA             |.text|, CODE, READONLY, ALIGN=
+2
+   33 00000000         
+   34 00000000         ; Se alguma funï¿½ï¿½o do arquivo for chamada em outro a
+                       rquivo 
+   35 00000000                 EXPORT           START       ; Permite chamar a 
+                                                            funï¿½ï¿½o START a 
+                                                            partir de 
+   36 00000000         ; outro arquivo. No caso startup.s
+   37 00000000         
+   38 00000000         ; Se chamar alguma funï¿½ï¿½o externa 
+   39 00000000         ;IMPORT <func>              ; Permite chamar dentro dest
+                       e arquivo uma 
+   40 00000000         ; funï¿½ï¿½o <func>
+   41 00000000                 IMPORT           GPIO_start
+   42 00000000                 IMPORT           SetOutputBits
+   43 00000000                 IMPORT           SwitchPB4_PB5_PP5
+   44 00000000                 IMPORT           SysTick_Wait1ms
+   45 00000000                 IMPORT           PLL_Init
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+   46 00000000                 IMPORT           SysTick_Init
+   47 00000000                 IMPORT           Increment
+   48 00000000                 IMPORT           Set_1
+   49 00000000                 IMPORT           Set_0
+   50 00000000         
+   51 00000000         
+   52 00000000         ; ------------------------------------------------------
+                       -------------------------
+   53 00000000         ; Funï¿½ï¿½o main()
+   54 00000000         START
+   55 00000000         ; Comece o cï¿½digo aqui <==============================
+                       ========================
+   56 00000000         
+   57 00000000 F7FF FFFE       BL               SysTick_Init
+   58 00000004 F7FF FFFE       BL               GPIO_start  ;Chama a subrotina 
+                                                            que inicializa os G
+                                                            PIO
+   59 00000008 F7FF FFFE       BL               PLL_Init    ;Chama a subrotina 
+                                                            para alterar o cloc
+                                                            k do microcontrolad
+                                                            or para 80MHz
+   60 0000000C         
+   61 0000000C         
+   62 0000000C         ;setando os bits de R0 que vÃ£o aparecer nos leds/displa
+                       y
+   63 0000000C F04F 003F       mov              R0, #2_00111111
+   64 00000010 F7FF FFFE       BL               SetOutputBits
+   65 00000014         
+   66 00000014 F04F 0002       mov              R0, #2      ;imprimindo no Disp
+                                                            lay 1
+   67 00000018 F7FF FFFE       bl               SwitchPB4_PB5_PP5
+   68 0000001C         ;0 = 00111111
+   69 0000001C         ;1 = 00000110
+   70 0000001C         ;2 = 01011011
+   71 0000001C         ;3 = 01001111
+   72 0000001C         ;4 = 01100110
+   73 0000001C         ;5 = 01101101
+   74 0000001C         ;6 = 01111101
+   75 0000001C         ;7 = 00000111
+   76 0000001C         ;8 = 01111111
+   77 0000001C         ;9 = 01101111
+   78 0000001C         
+   79 0000001C         ;8. = 11111111
+   80 0000001C         
+   81 0000001C         SWITCH_RAPIDO_DISPLAYS_E_LEDS
+   82 0000001C F44F 70FA       MOV              R0, #500    ;Chamar a rotina pa
+                                                            ra esperar 4 ms
+   83 00000020 F7FF FFFE       BL               SysTick_Wait1ms
+   84 00000024 F7FF FFFE       BL               Increment
+   85 00000028         
+   86 00000028         ;MOV R0, #4               ;Chamar a rotina para esperar 
+                       4 ms
+   87 00000028         ;BL SysTick_Wait1ms
+   88 00000028         ;mov R0, #1 ;imprimindo nos LEDS
+   89 00000028         ;bl SwitchPB4_PB5_PP5
+   90 00000028         
+   91 00000028         ;mov R0, #2_10000001
+   92 00000028         ;BL SetOutputBits
+   93 00000028         
+
+
+
+ARM Macro Assembler    Page 3 
+
+
+   94 00000028         
+   95 00000028         ;MOV R0, #4                ;Chamar a rotina para esperar
+                        4ms
+   96 00000028         ;BL SysTick_Wait1ms
+   97 00000028         ;mov R0, #2;imprimindo no Display 1
+   98 00000028         ;bl SwitchPB4_PB5_PP5
+   99 00000028         
+  100 00000028         ;mov R0, #2_01111111
+  101 00000028         ;BL SetOutputBits
+  102 00000028         
+  103 00000028         
+  104 00000028         ;MOV R0, #4                ;Chamar a rotina para esperar
+                        4ms
+  105 00000028         ;BL SysTick_Wait1ms
+  106 00000028         ;mov R0, #4 ;imprimindo no Display 2
+  107 00000028         ;bl SwitchPB4_PB5_PP5
+  108 00000028         
+  109 00000028         ;mov R0, #2_01101111
+  110 00000028         ;BL SetOutputBits
+  111 00000028         
+  112 00000028 E7F8            b                SWITCH_RAPIDO_DISPLAYS_E_LEDS
+  113 0000002A         
+  114 0000002A         
+  115 0000002A         END_EXEC
+  116 0000002A BF00            NOP
+  117 0000002C                 ALIGN                        ; garante que o fim
+                                                             da seï¿½ï¿½o estï¿
+                                                            ½ alinhada 
+  118 0000002C                 END                          ; fim do arquivo
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=.\objects\pratica1.d -o.\objects\pratica1.o -IC:\Users\DAELN\De
+sktop\ucontrolados\Pratica1\RTE -IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Devic
+e\Include\TM4C129 -IC:\Keil_v5\ARM\CMSIS\Include --predefine="__EVAL SETA 1" --
+predefine="__UVISION_VERSION SETA 518" --predefine="TM4C1294NCPDT SETA 1" --lis
+t=.\listings\pratica1.lst src\pratica1.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+DATA 00000000
+
+Symbol: DATA
+   Definitions
+      At line 18 in file src\pratica1.s
+   Uses
+      None
+Comment: DATA unused
+1 symbol
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+.text 00000000
+
+Symbol: .text
+   Definitions
+      At line 32 in file src\pratica1.s
+   Uses
+      None
+Comment: .text unused
+END_EXEC 0000002A
+
+Symbol: END_EXEC
+   Definitions
+      At line 115 in file src\pratica1.s
+   Uses
+      None
+Comment: END_EXEC unused
+START 00000000
+
+Symbol: START
+   Definitions
+      At line 54 in file src\pratica1.s
+   Uses
+      At line 35 in file src\pratica1.s
+Comment: START used once
+SWITCH_RAPIDO_DISPLAYS_E_LEDS 0000001C
+
+Symbol: SWITCH_RAPIDO_DISPLAYS_E_LEDS
+   Definitions
+      At line 81 in file src\pratica1.s
+   Uses
+      At line 112 in file src\pratica1.s
+Comment: SWITCH_RAPIDO_DISPLAYS_E_LEDS used once
+4 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+External symbols
+
+GPIO_start 00000000
+
+Symbol: GPIO_start
+   Definitions
+      At line 41 in file src\pratica1.s
+   Uses
+      At line 58 in file src\pratica1.s
+Comment: GPIO_start used once
+Increment 00000000
+
+Symbol: Increment
+   Definitions
+      At line 47 in file src\pratica1.s
+   Uses
+      At line 84 in file src\pratica1.s
+Comment: Increment used once
+PLL_Init 00000000
+
+Symbol: PLL_Init
+   Definitions
+      At line 45 in file src\pratica1.s
+   Uses
+      At line 59 in file src\pratica1.s
+Comment: PLL_Init used once
+SetOutputBits 00000000
+
+Symbol: SetOutputBits
+   Definitions
+      At line 42 in file src\pratica1.s
+   Uses
+      At line 64 in file src\pratica1.s
+Comment: SetOutputBits used once
+Set_0 00000000
+
+Symbol: Set_0
+   Definitions
+      At line 49 in file src\pratica1.s
+   Uses
+      None
+Comment: Set_0 unused
+Set_1 00000000
+
+Symbol: Set_1
+   Definitions
+      At line 48 in file src\pratica1.s
+   Uses
+      None
+Comment: Set_1 unused
+SwitchPB4_PB5_PP5 00000000
+
+Symbol: SwitchPB4_PB5_PP5
+   Definitions
+      At line 43 in file src\pratica1.s
+   Uses
+      At line 67 in file src\pratica1.s
+Comment: SwitchPB4_PB5_PP5 used once
+SysTick_Init 00000000
+
+Symbol: SysTick_Init
+
+
+
+ARM Macro Assembler    Page 2 Alphabetic symbol ordering
+External symbols
+
+   Definitions
+      At line 46 in file src\pratica1.s
+   Uses
+      At line 57 in file src\pratica1.s
+Comment: SysTick_Init used once
+SysTick_Wait1ms 00000000
+
+Symbol: SysTick_Wait1ms
+   Definitions
+      At line 44 in file src\pratica1.s
+   Uses
+      At line 83 in file src\pratica1.s
+Comment: SysTick_Wait1ms used once
+9 symbols
+348 symbols in table

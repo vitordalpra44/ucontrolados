@@ -233,14 +233,14 @@ SetOutputBits
 GetOutputBits
 	PUSH 	{R1, R2, LR, R3, R4}
 	LDR     R1, =GPIO_PORTA_BASE + DATA_OFFSET
-	;LDR     R2, =GPIO_PORTQ_BASE + DATA_OFFSET
+	LDR     R2, =GPIO_PORTQ_BASE + DATA_OFFSET
 	LDR 	R3, [R1]
 	and		r3, #0xF0
-	;ldr		R4, [R2]
-	;and		r4, #0xF
+	ldr		R4, [R2]
+	and		r4, #0xF
 	
-	;and		R3, R4
-	;mov 	R0, R3
+	orr		R3, R4
+	mov 	R0, R3
 	
 	POP 	{R1, R2, LR, R3, R4}
 	BX		LR
