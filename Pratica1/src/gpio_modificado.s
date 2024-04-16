@@ -54,8 +54,8 @@ GPIO_PORTQ            EQU    2_100000000000000
 
 		; Se alguma função do arquivo for chamada em outro arquivo	
         EXPORT GPIO_start            ; Permite chamar GPIO_Init de outro arquivo
-		EXPORT SetOutpuyBits
-		EXPORT ACTIVATE_PP5_DEACTIVATE_PB4_PB5
+		EXPORT SetOutputBits
+		EXPORT GetOutputBits
 		EXPORT SwitchPB4_PB5_PP5
 
 ;--------------------------------------------------------------------------------
@@ -204,17 +204,17 @@ EsperaGPIO
         BX      LR
 
 ; -------------------------------------------------------------------------------
-SetOutpuyBits
+SetOutputBits
     PUSH    {R1, R2, R3}                ; Salva os registradores R1, R2 e R3
 
     ; Isola os 8 bits menos significativos de R0
     MOV     R3, R0
-    AND     R3, #0xFF                   
+    AND     R3, #0xFF      
 
     ; Zerar todos os bits de A e Q antes de setar os novos valores
     LDR     R1, =GPIO_PORTA_BASE + DATA_OFFSET
     MOV     R2, #0x00
-    STR     R2, [R1]             ; Zera P7-P4
+    STR     R2, [R1]             ; Zera A7-A4
     
     LDR     R1, =GPIO_PORTQ_BASE + DATA_OFFSET
     STR     R2, [R1]             ; Zera Q3-Q0
@@ -230,21 +230,20 @@ SetOutpuyBits
     POP     {R1, R2, R3}                 ; Restaura os registradores R1, R2 e R3
     BX      LR                           ; Retorna da função
 
-ACTIVATE_PP5_DEACTIVATE_PB4_PB5
-    PUSH    {R1, R2}            ; Salva os registradores usados
-
-    ; Ativar PP5
-    LDR     R1, =GPIO_PORTP_BASE + DATA_OFFSET
-    mov     R0, #2_00100000           ; Setar PP5 como alto
-    STR     R0, [R1]
-
-    ; Desativar PB4 e PB5
-    LDR     R1, =GPIO_PORTB_BASE + DATA_OFFSET
-    mov     R0, #2_00000000          
-    STR     R0, [R1]
-
-    POP     {R1, R2}             ; Restaura os registradores
-    BX      LR                   ; Retorna da função
+GetOutputBits
+	PUSH 	{R1, R2, LR, R3, R4}
+	LDR     R1, =GPIO_PORTA_BASE + DATA_OFFSET
+	;LDR     R2, =GPIO_PORTQ_BASE + DATA_OFFSET
+	LDR 	R3, [R1]
+	and		r3, #0xF0
+	;ldr		R4, [R2]
+	;and		r4, #0xF
+	
+	;and		R3, R4
+	;mov 	R0, R3
+	
+	POP 	{R1, R2, LR, R3, R4}
+	BX		LR
 
 ; Função SwitchPB4_PB5_PP5
 ; Parâmetro: R0 = 1 para 001, 2 para 010, 4 para 100

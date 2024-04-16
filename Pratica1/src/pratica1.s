@@ -39,42 +39,74 @@
         ;IMPORT <func>              ; Permite chamar dentro deste arquivo uma 
 									; fun��o <func>
 		IMPORT  GPIO_start
-		IMPORT SetOutpuyBits
-		IMPORT ACTIVATE_PP5_DEACTIVATE_PB4_PB5
+		IMPORT SetOutputBits
 		IMPORT SwitchPB4_PB5_PP5
 		IMPORT SysTick_Wait1ms
 		IMPORT  PLL_Init
 		IMPORT  SysTick_Init
+		IMPORT Increment
+		IMPORT Set_1		
+		IMPORT Set_0
+
+
 ; -------------------------------------------------------------------------------
 ; Fun��o main()
 START 
 ; Comece o c�digo aqui <======================================================
-		
+
+	BL SysTick_Init	
 	BL GPIO_start                 ;Chama a subrotina que inicializa os GPIO
 	BL PLL_Init                  ;Chama a subrotina para alterar o clock do microcontrolador para 80MHz
-	BL SysTick_Init
 	
 	
 	;setando os bits de R0 que vão aparecer nos leds/display
-	mov R0, #2_10101010
-	BL SetOutpuyBits
+	BL Set_0
 	
-	
-SWITCH_RAPIDO_DISPLAYS_E_LEDS
-	MOV R0, #4               ;Chamar a rotina para esperar 4 ms
-	BL SysTick_Wait1ms
-	
-	mov R0, #1 ;imprimindo nos LEDS
-	bl SwitchPB4_PB5_PP5
-	MOV R0, #4                ;Chamar a rotina para esperar 4ms
-	BL SysTick_Wait1ms
 	mov R0, #2;imprimindo no Display 1
 	bl SwitchPB4_PB5_PP5
-	MOV R0, #4                ;Chamar a rotina para esperar 4ms
+	;0 = 00111111
+	;1 = 00000110
+	;2 = 01011011
+	;3 = 01001111
+	;4 = 01100110
+	;5 = 01101101
+	;6 = 01111101
+	;7 = 00000111
+	;8 = 01111111
+	;9 = 01101111
+	
+	;8. = 11111111
+	
+SWITCH_RAPIDO_DISPLAYS_E_LEDS
+	MOV R0, #500               ;Chamar a rotina para esperar 4 ms
 	BL SysTick_Wait1ms
-	mov R0, #4 ;imprimindo no Display 2
-	bl SwitchPB4_PB5_PP5
+	BL Increment
 
+	;MOV R0, #4               ;Chamar a rotina para esperar 4 ms
+	;BL SysTick_Wait1ms
+	;mov R0, #1 ;imprimindo nos LEDS
+	;bl SwitchPB4_PB5_PP5
+	
+	;mov R0, #2_10000001
+	;BL SetOutputBits
+	
+	
+	;MOV R0, #4                ;Chamar a rotina para esperar 4ms
+	;BL SysTick_Wait1ms
+	;mov R0, #2;imprimindo no Display 1
+	;bl SwitchPB4_PB5_PP5
+	
+	;mov R0, #2_01111111
+	;BL SetOutputBits
+	
+
+	;MOV R0, #4                ;Chamar a rotina para esperar 4ms
+	;BL SysTick_Wait1ms
+	;mov R0, #4 ;imprimindo no Display 2
+	;bl SwitchPB4_PB5_PP5
+	
+	;mov R0, #2_01101111
+	;BL SetOutputBits
 	
 	b SWITCH_RAPIDO_DISPLAYS_E_LEDS
 
