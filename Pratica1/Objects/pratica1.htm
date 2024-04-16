@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\pratica1.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\pratica1.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060061: Last Updated: Tue Apr 16 10:52:35 2024
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060061: Last Updated: Tue Apr 16 11:59:48 2024
 <BR><P>
 <H3>Maximum Stack Usage =          0 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -13,22 +13,21 @@ Call chain for Maximum Stack Depth:</H3>
 Functions with no stack information
 </H3><UL>
  <LI><a href="#[0]">Reset_Handler</a>
- <LI><a href="#[77]">DisableInterrupts</a>
- <LI><a href="#[78]">EnableInterrupts</a>
- <LI><a href="#[79]">StartCritical</a>
- <LI><a href="#[7a]">EndCritical</a>
- <LI><a href="#[7b]">WaitForInterrupt</a>
- <LI><a href="#[73]">PLL_Init</a>
- <LI><a href="#[71]">SysTick_Init</a>
- <LI><a href="#[75]">SysTick_Wait1ms</a>
- <LI><a href="#[72]">GPIO_start</a>
- <LI><a href="#[70]">SetOutputBits</a>
+ <LI><a href="#[76]">DisableInterrupts</a>
+ <LI><a href="#[77]">EnableInterrupts</a>
+ <LI><a href="#[78]">StartCritical</a>
+ <LI><a href="#[79]">EndCritical</a>
+ <LI><a href="#[7a]">WaitForInterrupt</a>
+ <LI><a href="#[72]">PLL_Init</a>
+ <LI><a href="#[70]">SysTick_Init</a>
+ <LI><a href="#[73]">SysTick_Wait1ms</a>
+ <LI><a href="#[71]">GPIO_start</a>
+ <LI><a href="#[6f]">SetOutputBits</a>
  <LI><a href="#[6d]">GetOutputBits</a>
  <LI><a href="#[74]">SwitchPB4_PB5_PP5</a>
  <LI><a href="#[6c]">Decoder</a>
- <LI><a href="#[76]">Increment</a>
- <LI><a href="#[6f]">Set_0</a>
- <LI><a href="#[6e]">Set_1</a>
+ <LI><a href="#[75]">Increment</a>
+ <LI><a href="#[6e]">Decrement</a>
  <LI><a href="#[6b]">START</a>
 </UL>
 </UL>
@@ -525,40 +524,40 @@ Global Symbols
 <P><STRONG><a name="[36]"></a>uDMA_Handler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup.o(RESET))
 <BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
 </UL>
-<P><STRONG><a name="[77]"></a>DisableInterrupts</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, startup.o(.text), UNUSED)
+<P><STRONG><a name="[76]"></a>DisableInterrupts</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, startup.o(.text), UNUSED)
 
-<P><STRONG><a name="[78]"></a>EnableInterrupts</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, startup.o(.text), UNUSED)
+<P><STRONG><a name="[77]"></a>EnableInterrupts</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, startup.o(.text), UNUSED)
 
-<P><STRONG><a name="[79]"></a>StartCritical</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, startup.o(.text), UNUSED)
+<P><STRONG><a name="[78]"></a>StartCritical</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, startup.o(.text), UNUSED)
 
-<P><STRONG><a name="[7a]"></a>EndCritical</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, startup.o(.text), UNUSED)
+<P><STRONG><a name="[79]"></a>EndCritical</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, startup.o(.text), UNUSED)
 
-<P><STRONG><a name="[7b]"></a>WaitForInterrupt</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, startup.o(.text), UNUSED)
+<P><STRONG><a name="[7a]"></a>WaitForInterrupt</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, startup.o(.text), UNUSED)
 
-<P><STRONG><a name="[73]"></a>PLL_Init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, utils.o(.text))
+<P><STRONG><a name="[72]"></a>PLL_Init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, utils.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;START
 </UL>
 
-<P><STRONG><a name="[71]"></a>SysTick_Init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, utils.o(.text))
+<P><STRONG><a name="[70]"></a>SysTick_Init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, utils.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;START
 </UL>
 
-<P><STRONG><a name="[75]"></a>SysTick_Wait1ms</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, utils.o(.text))
+<P><STRONG><a name="[73]"></a>SysTick_Wait1ms</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, utils.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;START
 </UL>
 
-<P><STRONG><a name="[72]"></a>GPIO_start</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, gpio_modificado.o(.text))
+<P><STRONG><a name="[71]"></a>GPIO_start</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, gpio_modificado.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;START
 </UL>
 
-<P><STRONG><a name="[70]"></a>SetOutputBits</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, gpio_modificado.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Set_1
-<LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Set_0
+<P><STRONG><a name="[6f]"></a>SetOutputBits</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, gpio_modificado.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Decrement
 <LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;START
 </UL>
 
 <P><STRONG><a name="[6d]"></a>GetOutputBits</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, gpio_modificado.o(.text), UNUSED)
-<BR><BR>[Called By]<UL><LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Decoder
+<BR><BR>[Called By]<UL><LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Decrement
+<LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Decoder
 </UL>
 
 <P><STRONG><a name="[74]"></a>SwitchPB4_PB5_PP5</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, gpio_modificado.o(.text))
@@ -566,35 +565,26 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[6c]"></a>Decoder</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, decoder.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Set_1
-<LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Set_0
-<LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetOutputBits
+<BR><BR>[Calls]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetOutputBits
 </UL>
 
-<P><STRONG><a name="[76]"></a>Increment</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, decoder.o(.text))
+<P><STRONG><a name="[75]"></a>Increment</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, decoder.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;START
 </UL>
 
-<P><STRONG><a name="[6f]"></a>Set_0</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, decoder.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetOutputBits
-</UL>
-<BR>[Called By]<UL><LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Decoder
-</UL>
-
-<P><STRONG><a name="[6e]"></a>Set_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, decoder.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetOutputBits
-</UL>
-<BR>[Called By]<UL><LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Decoder
+<P><STRONG><a name="[6e]"></a>Decrement</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, decoder.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetOutputBits
+<LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetOutputBits
 </UL>
 
 <P><STRONG><a name="[6b]"></a>START</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, pratica1.o(.text))
-<BR><BR>[Calls]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Increment
+<BR><BR>[Calls]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Increment
 <LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SwitchPB4_PB5_PP5
-<LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetOutputBits
-<LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_start
-<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Wait1ms
-<LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Init
-<LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PLL_Init
+<LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetOutputBits
+<LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_start
+<LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Wait1ms
+<LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Init
+<LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PLL_Init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Reset_Handler
 </UL>

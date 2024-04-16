@@ -200,6 +200,34 @@ EsperaGPIO
         LDR     R0, =GPIO_PORTQ_BASE + DEN_OFFSET
 		MOV     R2, #2_00001111 ;
         STR     R2, [R0]  ; Habilita função digital
+		
+		;Port J - ENTRADA - J0 - J1
+        MOV     R2, #0x00
+        LDR     R0, =GPIO_PORTJ_BASE + AMSEL_OFFSET
+        STR     R2, [R0]  ; Desabilita função analógica (PADRÃO)
+		
+        LDR     R0, =GPIO_PORTJ_BASE + PCTL_OFFSET
+        STR     R2, [R0]  ; Limpa PCTL para selecionar GPIO (PADRÃO)
+		
+        LDR     R0, =GPIO_PORTJ_BASE + DIR_OFFSET
+        MOV     R2, #2_00000000 ; Define os pinos A7-A4 como saída
+        STR     R2, [R0]
+		
+
+        LDR     R0, =GPIO_PORTJ_BASE + AFSEL_OFFSET
+		MOV 	R2, #0x00
+        STR     R2, [R0]  ; Desabilita funções alternativas
+		
+
+        LDR     R0, =GPIO_PORTJ_BASE + DEN_OFFSET
+		MOV     R2, #2_00000011 ;
+        STR     R2, [R0]  ; Habilita função digital
+		
+		
+		;Se o pino for de entrada:
+        LDR     R0, =GPIO_PORTJ_BASE + PUR_OFFSET
+        MOV     R2, #2_00000011 ; Habilita resistores de pull-up para pinos específicos
+        STR     R2, [R0]
 
         BX      LR
 

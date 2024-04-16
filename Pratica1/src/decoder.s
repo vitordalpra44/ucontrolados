@@ -44,8 +44,8 @@ DISPLAY_9		EQU 2_01101111
 		; Se alguma fun??o do arquivo for chamada em outro arquivo	
         EXPORT Decoder                ; Permite chamar a fun??o START a partir de 
 		EXPORT Increment	                        ; outro arquivo. No caso startup.s
-		EXPORT Set_1
-		EXPORT Set_0
+		EXPORT Decrement
+		
 
 		; Se chamar alguma fun??o externa	
         ;IMPORT <func>              ; Permite chamar dentro deste arquivo uma 
@@ -57,15 +57,14 @@ DISPLAY_9		EQU 2_01101111
 ; Fun??o main()
 Decoder 
 ; Comece o c?digo aqui <======================================================
+
 Increment
 	push {R0, R2, LR}
 	
 	BL GetOutputBits
 	
-	
 	CMP R0, #DISPLAY_0
 	BEQ Set_1
-	
 	
 	CMP R0, #DISPLAY_1
 	BEQ Set_2
@@ -73,21 +72,14 @@ Increment
 	CMP R0, #DISPLAY_2
 	BEQ Set_3
 	
-	
 	CMP R0, #DISPLAY_3
 	BEQ Set_4
-	
-
-	CMP R0, #DISPLAY_3
-	BEQ Set_4
-	
 	
 	CMP R0, #DISPLAY_4
 	BEQ Set_5
 	
 	CMP R0, #DISPLAY_5
 	BEQ Set_6
-	
 	
 	CMP R0, #DISPLAY_6
 	BEQ Set_7
@@ -105,7 +97,44 @@ Increment
 Exit_Increment
 	pop {R0, R2, LR}
 	BX LR
+
+Decrement
+	push {R0, R2, LR}
 	
+	BL GetOutputBits
+	
+	
+	CMP R0, #DISPLAY_0
+	BEQ Set_9
+	
+	CMP R0, #DISPLAY_1
+	BEQ Set_0
+	
+	CMP R0, #DISPLAY_2
+	BEQ Set_1
+	
+	
+	CMP R0, #DISPLAY_3
+	BEQ Set_2
+	
+	CMP R0, #DISPLAY_4
+	BEQ Set_3
+	
+	CMP R0, #DISPLAY_5
+	BEQ Set_4
+	
+	CMP R0, #DISPLAY_6
+	BEQ Set_5
+	
+	CMP R0, #DISPLAY_7
+	BEQ Set_6
+	
+	CMP R0, #DISPLAY_8
+	BEQ Set_7
+	
+	CMP R0, #DISPLAY_9
+	BEQ Set_8
+
 Set_0
 	push {R0, LR}
 	ldr R0, =DISPLAY_0
