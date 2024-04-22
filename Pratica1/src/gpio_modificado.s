@@ -56,7 +56,11 @@ GPIO_PORTQ            EQU    2_100000000000000
         EXPORT GPIO_start            ; Permite chamar GPIO_Init de outro arquivo
 		EXPORT SetOutputBits
 		EXPORT GetOutputBits
-		EXPORT SwitchPB4_PB5_PP5
+		EXPORT SwitchPP
+		EXPORT SwitchPB
+		EXPORT GetOutputA
+		EXPORT GetOutputQ
+		EXPORT GetInputJ
 
 ;--------------------------------------------------------------------------------
 ; Função GPIO_start
@@ -273,48 +277,68 @@ GetOutputBits
 	POP 	{R1, R2, LR, R3, R4}
 	BX		LR
 
+GetOutputA
+	LDR	R1, =GPIO_PORTA_BASE + DATA_OFFSET	    ;Carrega o valor do offset do data register
+	LDR R2, [R1]
+	BIC R2, #2_11110000                     ;Primeiro limpamos os dois bits do lido da porta R2 = R2 & 00001111
+	ORR R0, R0, R2                          ;Fazer o OR do lido pela porta com o parâmetro de entrada
+	STR R0, [R1]                            ;Escreve na porta A o barramento de dados do pino A4 a A7
+	BX LR									;Retorno
+
+GetOutputQ
+	LDR	R1, =GPIO_PORTQ_BASE + DATA_OFFSET		    ;Carrega o valor do offset do data register
+	LDR R2, [R1]
+	BIC R2, #2_00001111                     ;Primeiro limpamos os dois bits do lido da porta R2 = R2 & 00001111
+	ORR R0, R0, R2                          ;Fazer o OR do lido pela porta com o parâmetro de entrada
+	STR R0, [R1]                            ;Escreve na porta Q o barramento de dados do pino Q0 a Q3
+	BX LR									;Retorno
+
+; Função que pega o valor na porta J
+GetInputJ
+	PUSH {R1}
+	LDR	R1, =GPIO_PORTJ_BASE + DATA_OFFSET  ;Carrega o valor do offset do data register
+	LDR R0, [R1]                            ;Lê no barramento de dados dos pinos [J0]
+	POP {R1}
+	BX LR									;Retorno
+
 ; Função SwitchPB4_PB5_PP5
 ; Parâmetro: R0 = 1 para 001, 2 para 010, 4 para 100
-SwitchPB4_PB5_PP5
-    PUSH    {R1, R2}            ; Salva os registradores usados
+SwitchPB
+    PUSH    {R1, R2, LR}            ; Salva os registradores usados
 
     ; Zerar PB4, PB5 e PP5
-    LDR     R1, =GPIO_PORTB_BASE + DATA_OFFSET ; Endereço de PB4
-    MOV     R2, #0
-    STR     R2, [R1]                               ; Zera PB4
-    LDR     R1, =GPIO_PORTB_BASE + DATA_OFFSET ; Endereço de PB5
-    STR     R2, [R1]                               ; Zera PB5
-    LDR     R1, =GPIO_PORTP_BASE + DATA_OFFSET  ; Endereço de PP5
-    STR     R2, [R1]                               ; Zera PP5
+	MOV     R2, #0
+	
+    LDR     R1, =GPIO_PORTB_BASE + DATA_OFFSET ; Endereço de PB
+    STR     R2, [R1]                               ; Zera PB    
 
     ; Aplicar configuração baseada em R0
-    CMP     R0, #1
-    BEQ     Set001
-    CMP     R0, #2
-    BEQ     Set010
-    CMP     R0, #4
-    BEQ     Set100
-    B       Exit
+	
+    BIC R2, #2_00110000                     ;Primeiro limpamos os dois bits do lido da porta R2 = R2 & 11001111
+	ORR R0, R0, R2                          ;Fazer o OR do lido pela porta com o parâmetro de entrada
+	STR R0, [R1]                            ;Escreve na porta B o barramento de dados do pino B4 e B5
+	
+	POP    {R1, R2, LR}
+	
+	BX LR									;Retorno
 
-Set001
-    LDR     R1, =GPIO_PORTP_BASE + DATA_OFFSET ; Endereço de PP5
-    MOV     R2, #2_00100000
-    STR     R2, [R1]                               ; Seta PP5
-    B       Exit
+SwitchPP
+	PUSH    {R1, R2, LR}            ; Salva os registradores usados
+    ; Zerar PP5
+	MOV     R2, #0
+    LDR     R1, =GPIO_PORTP_BASE + DATA_OFFSET  ; Endereço de PP
+    STR     R2, [R1]                               ; Zera PP
 
-Set010
-    LDR     R1, =GPIO_PORTB_BASE + DATA_OFFSET ; Endereço de PB5
-    MOV     R2, #2_00100000
-    STR     R2, [R1]                               ; Seta PB5
-    B       Exit
-
-Set100
-    LDR     R1, =GPIO_PORTB_BASE + DATA_OFFSET ; Endereço de PB4
-    MOV     R2, #2_00010000
-    STR     R2, [R1]                               ; Seta PB4
+	BIC R2, #2_00100000                     ;Primeiro limpamos os dois bits do lido da porta R2 = R2 & 11011111
+	ORR R0, R0, R2                          ;Fazer o OR do lido pela porta com o parâmetro de entrada
+	STR R0, [R1]                            ;Escreve na porta P o barramento de dados do pino P5
+	
+	POP    {R1, R2, LR}
+	
+	BX LR	
 
 Exit
-    POP     {R1, R2}                               ; Restaura os registradores
+    POP     {R1, R2, LR}                               ; Restaura os registradores
     BX      LR                                     ; Retorna da função
 	
 	

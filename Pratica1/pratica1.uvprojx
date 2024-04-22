@@ -404,6 +404,11 @@
               <FileType>2</FileType>
               <FilePath>.\src\pratica1.s</FilePath>
             </File>
+            <File>
+              <FileName>decoder.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\src\decoder.s</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

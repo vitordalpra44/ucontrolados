@@ -103,7 +103,6 @@ Decrement
 	
 	BL GetOutputBits
 	
-	
 	CMP R0, #DISPLAY_0
 	BEQ Set_9
 	
@@ -112,7 +111,6 @@ Decrement
 	
 	CMP R0, #DISPLAY_2
 	BEQ Set_1
-	
 	
 	CMP R0, #DISPLAY_3
 	BEQ Set_2
