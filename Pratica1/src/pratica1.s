@@ -47,7 +47,6 @@ DISPLAY_9		EQU 2_01101111
 		IMPORT  SysTick_Wait1ms
 		IMPORT  PLL_Init
 		IMPORT  SysTick_Init  
-		IMPORT	Decrement
 		IMPORT 	GetInputJ
 
 DISPLAY_NUMBERS   DCB   2_00111111, 2_00000110, 2_01011011, 2_01001111, 2_01100110, 2_01101101, 2_01111101, 2_00000111, 2_01111111, 2_01100111
@@ -82,14 +81,16 @@ START
 	
 	
 	MOV R4, #2_00000011			;REGISTRADOR 4 QUE GUARDA ESTADO DOS BOTÕES
-	MOV R5, #0					;REGISTRADOR 5 QUE GUARDA O CLOCK
+	MOV R5, #0					;REGISTRADOR 5 QUE GUARDA A FLAG DO CRONOMETRO
 	MOV R6, #2_00000001			;REGISTRADOR 6 QUE GUARDA O PASSO
 	
 	MOV R7, #2_00000000			;REGISTRADOR 7 QUE GUARDA A UNIDADE
 	MOV R8, #2_00000000 		;REGISTRADOR 8 QUE GUARDA A DEZENA
 	
-	MOV R10, #0
-	MOV R12, #0
+	MOV R10, #0					;REGISTRADOR 10 QUE ITERA A SEQUÊNCIA DOS LEDS
+	MOV R12, #0					;REGISTRADOR 12 QUE É UTILIZADO PARA VERIFICAR SE O PASSO É NEGATIVO
+
+;Clock da placa, quando o R5 chegar em 50 ele altera o valor a ser imprimido nos displays e leds 
 Clock
 	BL Update_Displays
 	BL GetInputJ				;Chama a subrotina que lê o estado das chaves e coloca o resultado em R0
@@ -98,77 +99,83 @@ Clock
 	CMP R5, #50	
 	BEQ Process
 	MOV R4, R0
-	
+
+;Função que controla o Switch 1
 SW1	
 	CMP R3, #2_00000001			;Verifica se somente o SW1 está pressionado
 	BNE SW2             		;Se não estiver pressionada vai pra SW2
 	
-	MOV R3, R6
+	MOV R3, R6				
 	
 	AND R12, R3, #2_11110000 ;Verifica se é negativo
-	CMP R12, #2_11110000	 ; 
+	CMP R12, #2_11110000
 	BEQ Decrescent
 		
-	ADD R3, #1
+	ADD R3, #1					;Realiza o incremento do passo, caso o próximo passo seja 10 ele reinicia para 1
 	CMP R3, #2_00001010
 	ITE EQ
 		MOVEQ R6, #2_00000001
 		MOVNE R6, R3
 	
 	B Clock
-
+	
+;Função que altera o passo caso seja negativo
 Decrescent
 
-	SUB R3, #1
+	SUB R3, #1					;Realiza o incremento do passo, caso o próximo passo seja -10 ele reinicia para -1
 	CMP R3, #-10
 	ITE EQ
 		MOVEQ R6, #-1
 		MOVNE R6, R3
 		
 	B Clock
-
+	
+;Função que controla o Switch 2
 SW2	
 	CMP R3, #2_00000010			 ;Verifica se somente a chave SW2 está pressionada
 	BNE Clock
 	
-	MVN R3, R6
-	ADD R3, R3, #1
+	MVN R3, R6					 ;Nega o valor atual do passo, invertendo-o
+	ADD R3, R3, #1	
 	MOV R6, R3
 		
 	B Clock
-
-Process							;Processo de adicionar o passo ao cronometro
+	
+;Função de processo, responsável por atualizar o próximo valor dos displays e leds
+Process							
 	ADD R9, R6
-	; 99 + 1 = 100
-	CMP R9, #99
+	
+	CMP R9, #99  			;Se o próximo valor dos displays for > 99, subtrai 100
 	IT GT
 		SUBGT R9, #100 ; R9 = 100 - 100 = 0
-	CMP	R9, #0
+		
+	CMP	R9, #0				;Se o próximo valor dos displays for < 0, soma 100
 	IT LT
 		ADDLT R9, #100
+		
 	MOV R3, #10
-	UDIV R8, R9, R3;ATUALIZA DEZENA
+	UDIV R8, R9, R3			;Altera a dezena, pegando o dígito mais significativo de R9
 	MUL R2, R8, R3
-	SUB R7, R9, R2;ATUALIZA UNIDADE
+	SUB R7, R9, R2			;Altera a unidade, subtraindo de R9 o valor da dezena
 	
-	CMP R10, #5
+	CMP R10, #5				;Altera o valor dos leds, a partir da posição da tabela
 	ITE LT
 		ADDLT R10, #1
 		MOVGE R10, #0
 	
-	MOV R5, #0
+	MOV R5, #0				;Reinicia flag do cronômetro
 
 Update_Displays
 	PUSH {LR}
 
 	MOV R0, R8
-	BL Display1
+	BL Display1				;Imprime Display1
 
 	MOV R0, R7
-	BL Display2
+	BL Display2				;Imprime Display2
 	
 	MOV R0, R10
-	BL Display_Leds
+	BL Display_Leds			;Imprime Leds
 	
 	POP {LR}
 	
@@ -177,19 +184,19 @@ Update_Displays
 Display_Leds
 	PUSH {LR}
 	
-	LDR  R1, =LEDS_SEQUENCE
-	LDRB R2, [R1, R0]
+	LDR  R1, =LEDS_SEQUENCE ;Recebe tabela
+	LDRB R2, [R1, R0]		;Pega item da tabela
 	
 	MOV R0, R2
-	BL SetOutputBits
+	BL SetOutputBits		;Seta os bits 
 	
-	MOV R0, #2_00100000
-	BL SwitchPP
+	MOV R0, #2_00100000		;Ativa o PP5
+	BL SwitchPP				;Habilita porta P
 	MOV R0, #1
 	BL SysTick_Wait1ms		
 	
 	MOV R0, #0
-	BL SwitchPP			
+	BL SwitchPP				;Desabilita porta P
 	MOV R0, #1
 	BL SysTick_Wait1ms		
 	
@@ -205,7 +212,7 @@ Display1
 	MOV R0, R2
 	BL SetOutputBits
 	
-	mov R0, #2_00010000;imprimindo no Display 1
+	mov R0, #2_00010000			;Ativa o PB4
 	bl PrintDisplay
 	
 	POP {LR}
@@ -220,7 +227,7 @@ Display2
 	MOV R0, R2
 	BL SetOutputBits
 
-	mov R0, #2_00100000;imprimindo no Display 2
+	mov R0, #2_00100000			;Ativa o PB5
 	bl PrintDisplay
 	
 	POP {LR}
@@ -230,14 +237,14 @@ PrintDisplay
 
 	PUSH{LR}
 	
-	BL SwitchPB			; Habilita o Port B
+	BL SwitchPB			;Habilita a porta B
 	MOV R0, #1
-	BL SysTick_Wait1ms		; Aguarda 1ms
+	BL SysTick_Wait1ms		
 	
 	MOV R0, #0
-	BL SwitchPB			; Desabilita o Port B
+	BL SwitchPB			;Desabilita a porta B
 	MOV R0, #1
-	BL SysTick_Wait1ms		; Aguarda 1ms
+	BL SysTick_Wait1ms		
 	
 	POP{LR}
 	BX LR

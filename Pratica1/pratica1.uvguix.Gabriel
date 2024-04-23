@@ -3606,18 +3606,18 @@
       <ActiveTab>0</ActiveTab>
       <Doc>
         <Name>.\src\pratica1.s</Name>
-        <ColumnNumber>29</ColumnNumber>
-        <TopLine>93</TopLine>
-        <CurrentLine>125</CurrentLine>
+        <ColumnNumber>30</ColumnNumber>
+        <TopLine>46</TopLine>
+        <CurrentLine>49</CurrentLine>
         <Folding>1</Folding>
         <ContractedFolders></ContractedFolders>
         <PaneID>0</PaneID>
       </Doc>
       <Doc>
         <Name>.\src\gpio_modificado.s</Name>
-        <ColumnNumber>13</ColumnNumber>
-        <TopLine>195</TopLine>
-        <CurrentLine>280</CurrentLine>
+        <ColumnNumber>39</ColumnNumber>
+        <TopLine>282</TopLine>
+        <CurrentLine>310</CurrentLine>
         <Folding>1</Folding>
         <ContractedFolders></ContractedFolders>
         <PaneID>0</PaneID>
@@ -3626,7 +3626,7 @@
   </MDIGroups>
 
   <Bookmarks>
-    <ListItem>.\src\pratica1.s 174</ListItem>
+    <ListItem>.\src\pratica1.s 181</ListItem>
   </Bookmarks>
 
 </ProjectGui>

@@ -275,45 +275,39 @@ GetOutputBits
 	POP 	{R1, R2, LR, R3, R4}
 	BX		LR
 
-; Função que pega o valor na porta J
 GetInputJ
 	PUSH {R1}
-	LDR	R1, =GPIO_PORTJ_BASE + DATA_OFFSET  ;Carrega o valor do offset do data register
-	LDR R0, [R1]                            ;Lê no barramento de dados dos pinos [J0]
+	LDR	R1, =GPIO_PORTJ_BASE + DATA_OFFSET 
+	LDR R0, [R1]                            
 	POP {R1}
-	BX LR									;Retorno
+	BX LR									
 
-; Função SwitchPB4_PB5_PP5
-; Parâmetro: R0 = 1 para 001, 2 para 010, 4 para 100
 SwitchPB
-    PUSH    {R1, R2, LR}            ; Salva os registradores usados
+    PUSH    {R1, R2, LR}            
 
-    ; Zerar PB4, PB5 e PP5
 	MOV     R2, #0
 	
-    LDR     R1, =GPIO_PORTB_BASE + DATA_OFFSET ; Endereço de PB
-    STR     R2, [R1]                               ; Zera PB    
-
-    ; Aplicar configuração baseada em R0
+    LDR     R1, =GPIO_PORTB_BASE + DATA_OFFSET
+    STR     R2, [R1]                                
 	
-    BIC R2, #2_00110000                     ;Primeiro limpamos os dois bits do lido da porta R2 = R2 & 11001111
-	ORR R0, R0, R2                          ;Fazer o OR do lido pela porta com o parâmetro de entrada
-	STR R0, [R1]                            ;Escreve na porta B o barramento de dados do pino B4 e B5
+    BIC R2, #2_00110000                    
+	ORR R0, R0, R2                         
+	STR R0, [R1]                            
 	
 	POP    {R1, R2, LR}
 	
-	BX LR									;Retorno
+	BX LR								
 
 SwitchPP
-	PUSH    {R1, R2, LR}            ; Salva os registradores usados
+	PUSH    {R1, R2, LR}        
     ; Zerar PP5
 	MOV     R2, #0
-    LDR     R1, =GPIO_PORTP_BASE + DATA_OFFSET  ; Endereço de PP
-    STR     R2, [R1]                               ; Zera PP
+    LDR     R1, =GPIO_PORTP_BASE + DATA_OFFSET  
+    STR     R2, [R1]                             
 
-	BIC R2, #2_00100000                     ;Primeiro limpamos os dois bits do lido da porta R2 = R2 & 11011111
-	ORR R0, R0, R2                          ;Fazer o OR do lido pela porta com o parâmetro de entrada
-	STR R0, [R1]                            ;Escreve na porta P o barramento de dados do pino P5
+	BIC R2, #2_00100000                     
+	ORR R0, R0, R2                        
+	STR R0, [R1]                       
 	
 	POP    {R1, R2, LR}
 	
