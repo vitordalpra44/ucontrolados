@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\pratica1.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\pratica1.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6210000: Last Updated: Mon Apr 22 14:02:38 2024
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6210000: Last Updated: Mon Apr 22 22:34:40 2024
 <BR><P>
 <H3>Maximum Stack Usage =          0 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -24,14 +24,12 @@ Functions with no stack information
  <LI><a href="#[6e]">GPIO_start</a>
  <LI><a href="#[70]">SetOutputBits</a>
  <LI><a href="#[75]">GetOutputBits</a>
- <LI><a href="#[7c]">GetOutputA</a>
- <LI><a href="#[7d]">GetOutputQ</a>
  <LI><a href="#[6f]">GetInputJ</a>
  <LI><a href="#[73]">SwitchPB</a>
  <LI><a href="#[71]">SwitchPP</a>
  <LI><a href="#[6b]">START</a>
  <LI><a href="#[74]">Decoder</a>
- <LI><a href="#[7e]">Increment</a>
+ <LI><a href="#[7c]">Increment</a>
  <LI><a href="#[76]">Decrement</a>
 </UL>
 </UL>
@@ -564,10 +562,6 @@ Global Symbols
 <LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Decrement
 </UL>
 
-<P><STRONG><a name="[7c]"></a>GetOutputA</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, gpio_modificado.o(.text), UNUSED)
-
-<P><STRONG><a name="[7d]"></a>GetOutputQ</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, gpio_modificado.o(.text), UNUSED)
-
 <P><STRONG><a name="[6f]"></a>GetInputJ</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, gpio_modificado.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;START
 </UL>
@@ -597,7 +591,7 @@ Global Symbols
 <BR><BR>[Calls]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetOutputBits
 </UL>
 
-<P><STRONG><a name="[7e]"></a>Increment</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, decoder.o(.text), UNUSED)
+<P><STRONG><a name="[7c]"></a>Increment</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, decoder.o(.text), UNUSED)
 
 <P><STRONG><a name="[76]"></a>Decrement</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, decoder.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetOutputBits

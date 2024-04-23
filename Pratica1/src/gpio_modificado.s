@@ -58,8 +58,6 @@ GPIO_PORTQ            EQU    2_100000000000000
 		EXPORT GetOutputBits
 		EXPORT SwitchPP
 		EXPORT SwitchPB
-		EXPORT GetOutputA
-		EXPORT GetOutputQ
 		EXPORT GetInputJ
 
 ;--------------------------------------------------------------------------------
@@ -276,22 +274,6 @@ GetOutputBits
 	
 	POP 	{R1, R2, LR, R3, R4}
 	BX		LR
-
-GetOutputA
-	LDR	R1, =GPIO_PORTA_BASE + DATA_OFFSET	    ;Carrega o valor do offset do data register
-	LDR R2, [R1]
-	BIC R2, #2_11110000                     ;Primeiro limpamos os dois bits do lido da porta R2 = R2 & 00001111
-	ORR R0, R0, R2                          ;Fazer o OR do lido pela porta com o parâmetro de entrada
-	STR R0, [R1]                            ;Escreve na porta A o barramento de dados do pino A4 a A7
-	BX LR									;Retorno
-
-GetOutputQ
-	LDR	R1, =GPIO_PORTQ_BASE + DATA_OFFSET		    ;Carrega o valor do offset do data register
-	LDR R2, [R1]
-	BIC R2, #2_00001111                     ;Primeiro limpamos os dois bits do lido da porta R2 = R2 & 00001111
-	ORR R0, R0, R2                          ;Fazer o OR do lido pela porta com o parâmetro de entrada
-	STR R0, [R1]                            ;Escreve na porta Q o barramento de dados do pino Q0 a Q3
-	BX LR									;Retorno
 
 ; Função que pega o valor na porta J
 GetInputJ
