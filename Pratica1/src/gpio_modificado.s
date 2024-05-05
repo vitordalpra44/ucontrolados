@@ -54,9 +54,11 @@ GPIO_PORTQ            EQU    2_100000000000000
 
 		; Se alguma função do arquivo for chamada em outro arquivo	
         EXPORT GPIO_start            ; Permite chamar GPIO_Init de outro arquivo
-		EXPORT SetOutpuyBits
-		EXPORT ACTIVATE_PP5_DEACTIVATE_PB4_PB5
-		EXPORT SwitchPB4_PB5_PP5
+		EXPORT SetOutputBits
+		EXPORT GetOutputBits
+		EXPORT SwitchPP
+		EXPORT SwitchPB
+		EXPORT GetInputJ
 
 ;--------------------------------------------------------------------------------
 ; Função GPIO_start
@@ -200,21 +202,49 @@ EsperaGPIO
         LDR     R0, =GPIO_PORTQ_BASE + DEN_OFFSET
 		MOV     R2, #2_00001111 ;
         STR     R2, [R0]  ; Habilita função digital
+		
+		;Port J - ENTRADA - J0 - J1
+        MOV     R2, #0x00
+        LDR     R0, =GPIO_PORTJ_BASE + AMSEL_OFFSET
+        STR     R2, [R0]  ; Desabilita função analógica (PADRÃO)
+		
+        LDR     R0, =GPIO_PORTJ_BASE + PCTL_OFFSET
+        STR     R2, [R0]  ; Limpa PCTL para selecionar GPIO (PADRÃO)
+		
+        LDR     R0, =GPIO_PORTJ_BASE + DIR_OFFSET
+        MOV     R2, #2_00000000 ; Define os pinos A7-A4 como saída
+        STR     R2, [R0]
+		
+
+        LDR     R0, =GPIO_PORTJ_BASE + AFSEL_OFFSET
+		MOV 	R2, #0x00
+        STR     R2, [R0]  ; Desabilita funções alternativas
+		
+
+        LDR     R0, =GPIO_PORTJ_BASE + DEN_OFFSET
+		MOV     R2, #2_00000011 ;
+        STR     R2, [R0]  ; Habilita função digital
+		
+		
+		;Se o pino for de entrada:
+        LDR     R0, =GPIO_PORTJ_BASE + PUR_OFFSET
+        MOV     R2, #2_00000011 ; Habilita resistores de pull-up para pinos específicos
+        STR     R2, [R0]
 
         BX      LR
 
 ; -------------------------------------------------------------------------------
-SetOutpuyBits
+SetOutputBits
     PUSH    {R1, R2, R3}                ; Salva os registradores R1, R2 e R3
 
     ; Isola os 8 bits menos significativos de R0
     MOV     R3, R0
-    AND     R3, #0xFF                   
+    AND     R3, #0xFF      
 
     ; Zerar todos os bits de A e Q antes de setar os novos valores
     LDR     R1, =GPIO_PORTA_BASE + DATA_OFFSET
     MOV     R2, #0x00
-    STR     R2, [R1]             ; Zera P7-P4
+    STR     R2, [R1]             ; Zera A7-A4
     
     LDR     R1, =GPIO_PORTQ_BASE + DATA_OFFSET
     STR     R2, [R1]             ; Zera Q3-Q0
@@ -230,64 +260,61 @@ SetOutpuyBits
     POP     {R1, R2, R3}                 ; Restaura os registradores R1, R2 e R3
     BX      LR                           ; Retorna da função
 
-ACTIVATE_PP5_DEACTIVATE_PB4_PB5
-    PUSH    {R1, R2}            ; Salva os registradores usados
+GetOutputBits
+	PUSH 	{R1, R2, LR, R3, R4}
+	LDR     R1, =GPIO_PORTA_BASE + DATA_OFFSET
+	LDR     R2, =GPIO_PORTQ_BASE + DATA_OFFSET
+	LDR 	R3, [R1]
+	and		r3, #0xF0
+	ldr		R4, [R2]
+	and		r4, #0xF
+	
+	orr		R3, R4
+	mov 	R0, R3
+	
+	POP 	{R1, R2, LR, R3, R4}
+	BX		LR
 
-    ; Ativar PP5
-    LDR     R1, =GPIO_PORTP_BASE + DATA_OFFSET
-    mov     R0, #2_00100000           ; Setar PP5 como alto
-    STR     R0, [R1]
+GetInputJ
+	PUSH {R1}
+	LDR	R1, =GPIO_PORTJ_BASE + DATA_OFFSET 
+	LDR R0, [R1]                            
+	POP {R1}
+	BX LR									
 
-    ; Desativar PB4 e PB5
+SwitchPB
+    PUSH    {R1, R2, LR}            
+
+	MOV     R2, #0
+	
     LDR     R1, =GPIO_PORTB_BASE + DATA_OFFSET
-    mov     R0, #2_00000000          
-    STR     R0, [R1]
+    STR     R2, [R1]                                
+	
+    BIC R2, #2_00110000                    
+	ORR R0, R0, R2                         
+	STR R0, [R1]                            
+	
+	POP    {R1, R2, LR}
+	
+	BX LR								
 
-    POP     {R1, R2}             ; Restaura os registradores
-    BX      LR                   ; Retorna da função
+SwitchPP
+	PUSH    {R1, R2, LR}        
+    ; Zerar PP5
+	MOV     R2, #0
+    LDR     R1, =GPIO_PORTP_BASE + DATA_OFFSET  
+    STR     R2, [R1]                             
 
-; Função SwitchPB4_PB5_PP5
-; Parâmetro: R0 = 1 para 001, 2 para 010, 4 para 100
-SwitchPB4_PB5_PP5
-    PUSH    {R1, R2}            ; Salva os registradores usados
-
-    ; Zerar PB4, PB5 e PP5
-    LDR     R1, =GPIO_PORTB_BASE + DATA_OFFSET ; Endereço de PB4
-    MOV     R2, #0
-    STR     R2, [R1]                               ; Zera PB4
-    LDR     R1, =GPIO_PORTB_BASE + DATA_OFFSET ; Endereço de PB5
-    STR     R2, [R1]                               ; Zera PB5
-    LDR     R1, =GPIO_PORTP_BASE + DATA_OFFSET  ; Endereço de PP5
-    STR     R2, [R1]                               ; Zera PP5
-
-    ; Aplicar configuração baseada em R0
-    CMP     R0, #1
-    BEQ     Set001
-    CMP     R0, #2
-    BEQ     Set010
-    CMP     R0, #4
-    BEQ     Set100
-    B       Exit
-
-Set001
-    LDR     R1, =GPIO_PORTP_BASE + DATA_OFFSET ; Endereço de PP5
-    MOV     R2, #2_00100000
-    STR     R2, [R1]                               ; Seta PP5
-    B       Exit
-
-Set010
-    LDR     R1, =GPIO_PORTB_BASE + DATA_OFFSET ; Endereço de PB5
-    MOV     R2, #2_00100000
-    STR     R2, [R1]                               ; Seta PB5
-    B       Exit
-
-Set100
-    LDR     R1, =GPIO_PORTB_BASE + DATA_OFFSET ; Endereço de PB4
-    MOV     R2, #2_00010000
-    STR     R2, [R1]                               ; Seta PB4
+	BIC R2, #2_00100000                     
+	ORR R0, R0, R2                        
+	STR R0, [R1]                       
+	
+	POP    {R1, R2, LR}
+	
+	BX LR	
 
 Exit
-    POP     {R1, R2}                               ; Restaura os registradores
+    POP     {R1, R2, LR}                               ; Restaura os registradores
     BX      LR                                     ; Retorna da função
 	
 	

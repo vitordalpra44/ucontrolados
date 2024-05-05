@@ -5,9 +5,10 @@ Component: Arm Compiler for Embedded 6.21 Tool: armlink [5ec1fa00]
 Section Cross References
 
     startup.o(RESET) refers to startup.o(STACK) for StackMem
-    startup.o(RESET) refers to pratica0.o(.text) for START
-    pratica0.o(.text) refers to gpio_modificado.o(.text) for GPIO_start
-    pratica0.o(.text) refers to utils.o(.text) for PLL_Init
+    startup.o(RESET) refers to pratica1.o(.text) for START
+    pratica1.o(DATA) refers (Special) to gpio_modificado.o(.text) for GetOutputBits
+    pratica1.o(.text) refers (Special) to gpio_modificado.o(.text) for GetOutputBits
+    pratica1.o(.text) refers to utils.o(.text) for PLL_Init
 
 
 ==============================================================================
@@ -18,25 +19,24 @@ Image Symbol Table
 
     Symbol Name                              Value     Ov Type        Size  Object(Section)
 
-    src/gpio.s                               0x00000000   Number         0  gpio.o ABSOLUTE
     src/gpio_modificado.s                    0x00000000   Number         0  gpio_modificado.o ABSOLUTE
-    src/pratica0.s                           0x00000000   Number         0  pratica0.o ABSOLUTE
-    src/startup.s                            0x00000000   Number         0  startup.o ABSOLUTE
-    src/utils.s                              0x00000000   Number         0  utils.o ABSOLUTE
+    src/pratica1.s                           0x00000000   Number         0  pratica1.o ABSOLUTE
+    src\startup.s                            0x00000000   Number         0  startup.o ABSOLUTE
+    src\utils.s                              0x00000000   Number         0  utils.o ABSOLUTE
     RESET                                    0x00000000   Section      544  startup.o(RESET)
     $v0                                      0x00000208   Number         0  startup.o(RESET)
     $v0                                      0x00000220   Number         0  startup.o(.text)
     .text                                    0x00000220   Section       28  startup.o(.text)
-    $v0                                      0x0000023c   Number         0  pratica0.o(.text)
-    .text                                    0x0000023c   Section       76  pratica0.o(.text)
-    $v0                                      0x00000288   Number         0  gpio.o(.text)
-    .text                                    0x00000288   Section      188  gpio.o(.text)
-    $v0                                      0x00000344   Number         0  utils.o(.text)
-    .text                                    0x00000344   Section      484  utils.o(.text)
-    $v0                                      0x00000528   Number         0  gpio_modificado.o(.text)
-    .text                                    0x00000528   Section      424  gpio_modificado.o(.text)
+    $v0                                      0x0000023c   Number         0  utils.o(.text)
+    .text                                    0x0000023c   Section      484  utils.o(.text)
+    $v0                                      0x00000420   Number         0  gpio_modificado.o(.text)
+    .text                                    0x00000420   Section      508  gpio_modificado.o(.text)
+    DISPLAY_NUMBERS                          0x0000061c   Data          10  pratica1.o(.text)
+    .text                                    0x0000061c   Section      372  pratica1.o(.text)
+    LEDS_SEQUENCE                            0x00000626   Data           6  pratica1.o(.text)
+    $v0                                      0x0000062c   Number         0  pratica1.o(.text)
     StackMem                                 0x20000000   Data           0  startup.o(STACK)
-    DATA                                     0x20000000   Section        0  pratica0.o(DATA)
+    DATA                                     0x20000000   Section        0  pratica1.o(DATA)
     HEAP                                     0x20000000   Section        0  startup.o(HEAP)
     STACK                                    0x20000000   Section     1024  startup.o(STACK)
 
@@ -44,7 +44,7 @@ Image Symbol Table
 
     Symbol Name                              Value     Ov Type        Size  Object(Section)
 
-    BuildAttributes$$THM_ISAv4$E$P$D$K$B$S$7EM$VFPi3$EXTD16$VFPS$VFMA$PE$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$~IW$USESV6$~STKCKD$USESV7$~SHL$OSPACE$EBA8$STANDARDLIB$EABIv2 0x00000000   Number         0  anon$$obj.o ABSOLUTE
+    BuildAttributes$$THM_ISAv4$E$P$D$K$B$S$7EM$VFPi3$EXTD16$VFPS$VFMA$PE$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$~IW$USESV6$~STKCKD$USESV7$~SHL$OSPACE$EBA8$STANDARDLIB$EABIv2 0x00000000   Number         0  anon$$obj.o ABSOLUTE
     __Vectors                                0x00000000   Data           0  startup.o(RESET)
     Reset_Handler                            0x00000209   Thumb Code     0  startup.o(RESET)
     NMI_Handler                              0x0000020d   Thumb Code     2  startup.o(RESET)
@@ -158,17 +158,16 @@ Image Symbol Table
     StartCritical                            0x00000229   Thumb Code     0  startup.o(.text)
     EndCritical                              0x00000231   Thumb Code     0  startup.o(.text)
     WaitForInterrupt                         0x00000237   Thumb Code     0  startup.o(.text)
-    START                                    0x0000023d   Thumb Code     0  pratica0.o(.text)
-    GPIO_Init                                0x00000289   Thumb Code     0  gpio.o(.text)
-    PortN_Output                             0x000002f3   Thumb Code     0  gpio.o(.text)
-    PortJ_Input                              0x00000303   Thumb Code     0  gpio.o(.text)
-    PLL_Init                                 0x00000345   Thumb Code     0  utils.o(.text)
-    SysTick_Init                             0x0000046d   Thumb Code     0  utils.o(.text)
-    SysTick_Wait1ms                          0x000004a7   Thumb Code     0  utils.o(.text)
-    GPIO_start                               0x00000529   Thumb Code     0  gpio_modificado.o(.text)
-    SetHighBits                              0x000005f3   Thumb Code     0  gpio_modificado.o(.text)
-    ACTIVATE_PP5_DEACTIVATE_PB4_PB5          0x00000613   Thumb Code     0  gpio_modificado.o(.text)
-    SwitchPB4_PB5_PP5                        0x00000629   Thumb Code     0  gpio_modificado.o(.text)
+    PLL_Init                                 0x0000023d   Thumb Code     0  utils.o(.text)
+    SysTick_Init                             0x00000365   Thumb Code     0  utils.o(.text)
+    SysTick_Wait1ms                          0x0000039f   Thumb Code     0  utils.o(.text)
+    GPIO_start                               0x00000421   Thumb Code     0  gpio_modificado.o(.text)
+    SetOutputBits                            0x00000517   Thumb Code     0  gpio_modificado.o(.text)
+    GetOutputBits                            0x00000537   Thumb Code     0  gpio_modificado.o(.text)
+    GetInputJ                                0x00000555   Thumb Code     0  gpio_modificado.o(.text)
+    SwitchPB                                 0x0000055f   Thumb Code     0  gpio_modificado.o(.text)
+    SwitchPP                                 0x00000579   Thumb Code     0  gpio_modificado.o(.text)
+    START                                    0x0000062d   Thumb Code     0  pratica1.o(.text)
 
 
 
@@ -178,25 +177,24 @@ Memory Map of the image
 
   Image entry point : Not specified.
 
-  Load Region LR_IROM1 (Base: 0x00000000, Size: 0x000006d0, Max: 0x00100000, ABSOLUTE)
+  Load Region LR_IROM1 (Base: 0x00000000, Size: 0x00000790, Max: 0x00100000, ABSOLUTE)
 
-    Execution Region ER_IROM1 (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x000006d0, Max: 0x00100000, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x00000790, Max: 0x00100000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x00000000   0x00000000   0x00000220   Code   RO            3    RESET               startup.o
     0x00000220   0x00000220   0x0000001c   Code   RO            4    .text               startup.o
-    0x0000023c   0x0000023c   0x0000004c   Code   RO           13    .text               pratica0.o
-    0x00000288   0x00000288   0x000000bc   Code   RO           16    .text               gpio.o
-    0x00000344   0x00000344   0x000001e4   Code   RO           19    .text               utils.o
-    0x00000528   0x00000528   0x000001a8   Code   RO           22    .text               gpio_modificado.o
+    0x0000023c   0x0000023c   0x000001e4   Code   RO           12    .text               utils.o
+    0x00000420   0x00000420   0x000001fc   Code   RO           15    .text               gpio_modificado.o
+    0x0000061c   0x0000061c   0x00000174   Code   RO           19    .text               pratica1.o
 
 
-    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x000006d0, Size: 0x00000400, Max: 0x00040000, ABSOLUTE)
+    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x00000790, Size: 0x00000400, Max: 0x00040000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x000006d0   0x00000000   Data   RW           12    DATA                pratica0.o
+    0x20000000   0x00000790   0x00000000   Data   RW           18    DATA                pratica1.o
     0x20000000        -       0x00000000   Zero   RW            2    HEAP                startup.o
     0x20000000        -       0x00000400   Zero   RW            1    STACK               startup.o
 
@@ -208,14 +206,13 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       188         60          0          0          0        264   gpio.o
-       424        104          0          0          0        360   gpio_modificado.o
-        76          0          0          0          0        236   pratica0.o
-       572        522          0          0       1024       1016   startup.o
-       484         92          0          0          0        376   utils.o
+       508        132          0          0          0        408   gpio_modificado.o
+       372         24          0          0          0        360   pratica1.o
+       572        522          0          0       1024       1024   startup.o
+       484         92          0          0          0        380   utils.o
 
     ----------------------------------------------------------------------
-      1744        778          0          0       1024       2252   Object Totals
+      1936        770          0          0       1024       2172   Object Totals
          0          0          0          0          0          0   (incl. Generated)
          0          0          0          0          0          0   (incl. Padding)
 
@@ -230,15 +227,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      1744        778          0          0       1024       2252   Grand Totals
-      1744        778          0          0       1024       2252   ELF Image Totals
-      1744        778          0          0          0          0   ROM Totals
+      1936        770          0          0       1024       2172   Grand Totals
+      1936        770          0          0       1024       2172   ELF Image Totals
+      1936        770          0          0          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 1744 (   1.70kB)
+    Total RO  Size (Code + RO Data)                 1936 (   1.89kB)
     Total RW  Size (RW Data + ZI Data)              1024 (   1.00kB)
-    Total ROM Size (Code + RO Data + RW Data)       1744 (   1.70kB)
+    Total ROM Size (Code + RO Data + RW Data)       1936 (   1.89kB)
 
 ==============================================================================
 
