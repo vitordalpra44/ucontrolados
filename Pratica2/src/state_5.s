@@ -1,8 +1,4 @@
-; gpio.s
-; Desenvolvido para a placa EK-TM4C1294XL
-; 
-; 19/03/2018
-
+; Desenvolvido com base no exemplo de aula
 ; -------------------------------------------------------------------------------
         THUMB                        ; Instruções do tipo Thumb-2
 ; -------------------------------------------------------------------------------

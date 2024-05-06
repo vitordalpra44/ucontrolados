@@ -1,7 +1,8 @@
-; gpio.s
+; pratica0.s
 ; Desenvolvido para a placa EK-TM4C1294XL
-; Prof. Guilherme Peron
-; 19/03/2018
+; Vitor Dalprá / Gabriel Willig
+; 07/03/2024
+; Feito com base no exemplo.s do professor Guilherme de Santi Peron de Sistemas Microcontrolados da UTFPR.
 
 ; -------------------------------------------------------------------------------
         THUMB                        ; Instruções do tipo Thumb-2
@@ -175,7 +176,7 @@ NVIC_FPCA_R             EQU         0xE000EF38
 NVIC_FPDSC_R            EQU         0xE000EF3C
 
 
-MAIN_STATE				EQU	   0X2000041C
+VAULT_STATE				EQU	   0X2000041C
 ; -------------------------------------------------------------------------------
 ; Área de Código - Tudo abaixo da diretiva a seguir será armazenado na memória de 
 ;                  código
@@ -200,9 +201,7 @@ MAIN_STATE				EQU	   0X2000041C
 		IMPORT State_5_c
 		IMPORT State_5_d
 ;--------------------------------------------------------------------------------
-; Função GPIO_Init
-; Parâmetro de entrada: Não tem
-; Parâmetro de saída: Não tem
+; Função main
 Start
 	BL PLL_Init
 	BL SysTick_Init
@@ -211,8 +210,8 @@ Start
 	BL LCD_Init
 	BL Ram_Init
 	
-Main
-	LDR R0, =MAIN_STATE
+MainLoop
+	LDR R0, =VAULT_STATE
 	LDRB R1, [R0]
 	
 	CMP R1, #0
@@ -242,7 +241,7 @@ Main
 	CMP R1, #8
 	BLEQ State_5_d
 	
-	B Main
+	B MainLoop
 	
 	ALIGN                           ; garante que o fim da seção está alinhada 
 	END
