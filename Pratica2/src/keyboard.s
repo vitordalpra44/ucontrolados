@@ -1,5 +1,5 @@
 ; -------------------------------------------------------------------------------
-        THUMB                        ; Instruções do tipo Thumb-2
+        THUMB                        ; Instru??es do tipo Thumb-2
 ; -------------------------------------------------------------------------------
 
 ;PORT L
@@ -75,14 +75,14 @@ GPIO_PORTM				EQU			2_000100000000000
 	
 KEYBOARD_DIGIT			EQU	   0x20000404
 ; -------------------------------------------------------------------------------
-; Área de Código - Tudo abaixo da diretiva a seguir será armazenado na memória de 
-;                  código
+; ?rea de C?digo - Tudo abaixo da diretiva a seguir ser? armazenado na mem?ria de 
+;                  c?digo
         AREA    |.text|, CODE, READONLY, ALIGN=2
 		
 		IMPORT SysTick_Wait1ms
 			
 
-		; Se alguma função do arquivo for chamada em outro arquivo	
+		; Se alguma fun??o do arquivo for chamada em outro arquivo	
         EXPORT Keyboard_Read            ; Permite chamar GPIO_Init de outro arquivo						
 
 ;--------------------------------------------------------------------------------

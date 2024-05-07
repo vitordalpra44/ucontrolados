@@ -1,5 +1,5 @@
 ; -------------------------------------------------------------------------------
-        THUMB                        ; Instruções do tipo Thumb-2
+        THUMB                        ; Instru??es do tipo Thumb-2
 ; -------------------------------------------------------------------------------
 
 ; PORT J
@@ -129,13 +129,13 @@ NVIC_FPDSC_R            EQU         0xE000EF3C
 
 MAIN_STATE				EQU	   0X2000041C
 GOTO_STATE_5_B			EQU	   0X2000040E
-GOTO_STATE_5_D			EQU	   0X2000041B
+GOTO_STATE_6			EQU	   0X2000041B
 ; -------------------------------------------------------------------------------
-; Área de Código - Tudo abaixo da diretiva a seguir será armazenado na memória de 
-;                  código
+; ?rea de C?digo - Tudo abaixo da diretiva a seguir ser? armazenado na mem?ria de 
+;                  c?digo
         AREA    |.text|, CODE, READONLY, ALIGN=2
 
-		; Se alguma função do arquivo for chamada em outro arquivo	
+		; Se alguma fun??o do arquivo for chamada em outro arquivo	
 		EXPORT Interrupt_Init	
 		EXPORT GPIOPortJ_Handler
 
@@ -205,7 +205,7 @@ GPIOPortJ_Handler
 	
 	CMP R0, #5
 	ITTT EQ
-		LDREQ R0, =GOTO_STATE_5_D
+		LDREQ R0, =GOTO_STATE_6
 		MOVEQ R1, #1
 		STRBEQ R1, [R0]
 		
@@ -237,5 +237,5 @@ USR_SW_2
 FINAL
 	BX LR
 	
-	ALIGN                           ; garante que o fim da seção está alinhada 
+	ALIGN                           ; garante que o fim da se??o est? alinhada 
 	END                             ; fim do arquivo

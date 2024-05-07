@@ -1,8 +1,8 @@
 ; Desenvolvido com base no exemplo de aula
 ; -------------------------------------------------------------------------------
-        THUMB                        ; Instruções do tipo Thumb-2
+        THUMB                        ; Instru??es do tipo Thumb-2
 ; -------------------------------------------------------------------------------
-; Declarações EQU - Defines
+; Declara??es EQU - Defines
 ; ========================
 GPIO_PORTA_AHB_DATA_R       EQU    0x400583FC
 GPIO_PORTP_DATA_R       	EQU    0x400653FC
@@ -36,18 +36,18 @@ MASTER_PASSWORD_SET_P1	EQU	   0X20000417
 MASTER_PASSWORD_SET_P2	EQU	   0X20000418
 MASTER_PASSWORD_SET_P3	EQU	   0X20000419
 MASTER_PASSWORD_SET_P4	EQU	   0X2000041A
-GOTO_STATE_5_D			EQU	   0X2000041B
+GOTO_STATE_6			EQU	   0X2000041B
 
 ; -------------------------------------------------------------------------------
-; Área de Código - Tudo abaixo da diretiva a seguir será armazenado na memória de 
-;                  código
+; ?rea de C?digo - Tudo abaixo da diretiva a seguir ser? armazenado na mem?ria de 
+;                  c?digo
         AREA    |.text|, CODE, READONLY, ALIGN=2
 
-		; Se alguma função do arquivo for chamada em outro arquivo	
+		; Se alguma fun??o do arquivo for chamada em outro arquivo	
 		EXPORT State_5_a
 		EXPORT State_5_b
 		EXPORT State_5_c
-		EXPORT State_5_d
+		EXPORT State_6
 			
 		IMPORT State_0_Msg
 		IMPORT State_2_Msg
@@ -55,7 +55,7 @@ GOTO_STATE_5_D			EQU	   0X2000041B
 		IMPORT State_5_a_Msg
 		IMPORT State_5_b_Msg
 		IMPORT State_5_c_Msg
-		IMPORT State_5_d_Msg
+		IMPORT State_6_Msg
 		IMPORT LCD_Print_Char
 		IMPORT Keyboard_Read
 		IMPORT SysTick_Wait1ms
@@ -80,7 +80,7 @@ State_5_a_Print_Msg
 	B State_5_a_Print_Msg
 
 State_5_a_Final
-	LDR R0, =GOTO_STATE_5_D
+	LDR R0, =GOTO_STATE_6
 	LDRB R0, [R0]
 	
 	CMP R0, #1
@@ -236,7 +236,7 @@ State_5_c_Final
 	
 	BX LR
 
-State_5_d
+State_6
 	MOV R1, #0
 	LDR R0, =LOGIN_USER_PASSWORD_P1
 	STRB R1, [R0]
@@ -247,15 +247,15 @@ State_5_d
 	LDR R0, =LOGIN_USER_PASSWORD_P4
 	STRB R1, [R0]
 	
-	LDR R10, =State_5_d_Msg
+	LDR R10, =State_6_Msg
 	LDR R11, =LCD_NEW_WORD
 	MOV R12, #1
 	STRB R12, [R11]
 
-State_5_d_Print_Msg
+State_6_Print_Msg
 	LDRB R1, [R10], #1
 	CMP R1, #0
-	BEQ State_5_d_Intermediate
+	BEQ State_6_Intermediate
 	LDR R2, =LCD_CHAR
 	STRB R1, [R2]
 	
@@ -263,9 +263,9 @@ State_5_d_Print_Msg
 	BL LCD_Print_Char
 	POP {LR}
 	
-	B State_5_d_Print_Msg
+	B State_6_Print_Msg
 
-State_5_d_Intermediate	
+State_6_Intermediate	
 	LDR R0, =GPIO_PORTA_AHB_DATA_R
 	MOV R1, #2_11110000
 	STR R1, [R0]
@@ -295,40 +295,40 @@ State_5_d_Intermediate
 	LDRB R1, [R0]
 	
 	CMP R1, #0
-	BEQ State_5_d_Intermediate
+	BEQ State_6_Intermediate
 	
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	
 	CMP R1, #'#'
-	BEQ State_5_d_Final	
+	BEQ State_6_Final	
 
 	LDR R0, =LOGIN_USER_PASSWORD_P1
 	LDRB R2, [R0]
 	CMP R2, #0
 	STRBEQ R1, [R0]
-	BEQ State_5_d_Intermediate
+	BEQ State_6_Intermediate
 	
 	LDR R0, =LOGIN_USER_PASSWORD_P2
 	LDRB R2, [R0]
 	CMP R2, #0
 	STRBEQ R1, [R0]
-	BEQ State_5_d_Intermediate
+	BEQ State_6_Intermediate
 	
 	LDR R0, =LOGIN_USER_PASSWORD_P3
 	LDRB R2, [R0]
 	CMP R2, #0
 	STRBEQ R1, [R0]
-	BEQ State_5_d_Intermediate
+	BEQ State_6_Intermediate
 	
 	LDR R0, =LOGIN_USER_PASSWORD_P4
 	LDRB R2, [R0]
 	CMP R2, #0
 	STRBEQ R1, [R0]
-	BEQ State_5_d_Intermediate
+	BEQ State_6_Intermediate
 	
-	B State_5_d_Intermediate
+	B State_6_Intermediate
 
-State_5_d_Final
+State_6_Final
 	LDR R0, =LOGIN_USER_PASSWORD_P1
 	LDRB R1, [R0]
 	
@@ -352,7 +352,7 @@ State_5_d_Final
 		STRBNE R3, [R4]
 		
 	CMP R1, R2
-	BNE State_5_d_Intermediate
+	BNE State_6_Intermediate
 		
 	LDR R0, =LOGIN_USER_PASSWORD_P2
 	LDRB R1, [R0]
@@ -375,7 +375,7 @@ State_5_d_Final
 		STRBNE R3, [R4]
 		
 	CMP R1, R2
-	BNE State_5_d_Intermediate
+	BNE State_6_Intermediate
 
 	
 	LDR R0, =LOGIN_USER_PASSWORD_P3
@@ -399,7 +399,7 @@ State_5_d_Final
 		STRBNE R3, [R4]
 		
 	CMP R1, R2
-	BNE State_5_d_Intermediate
+	BNE State_6_Intermediate
 		
 		
 	LDR R0, =LOGIN_USER_PASSWORD_P4
@@ -423,7 +423,7 @@ State_5_d_Final
 		STRBNE R3, [R4]
 		
 	CMP R1, R2
-	BNE State_5_d_Intermediate
+	BNE State_6_Intermediate
 
 
 	LDR R0, =GPIO_PORTP_DATA_R
@@ -436,5 +436,5 @@ State_5_d_Final
 	
 	BX LR
 	
-	ALIGN                           ; garante que o fim da seção está alinhada 
+	ALIGN                           ; garante que o fim da se??o est? alinhada 
     END  

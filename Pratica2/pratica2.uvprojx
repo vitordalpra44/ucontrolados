@@ -425,14 +425,14 @@
               <FilePath>.\src\gpio_modificado.s</FilePath>
             </File>
             <File>
-              <FileName>state_5.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>.\src\state_5.s</FilePath>
-            </File>
-            <File>
               <FileName>state_machine.s</FileName>
               <FileType>2</FileType>
               <FilePath>.\src\state_machine.s</FilePath>
+            </File>
+            <File>
+              <FileName>final_states.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\src\final_states.s</FilePath>
             </File>
           </Files>
         </Group>

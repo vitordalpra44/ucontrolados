@@ -15,15 +15,15 @@ Section Cross References
     pratica2.o(.text) refers to lcd.o(.text) for LCD_Init
     pratica2.o(.text) refers to ram_init.o(.text) for Ram_Init
     pratica2.o(.text) refers to state_machine.o(.text) for State_0
-    pratica2.o(.text) refers to state_5.o(.text) for State_5_a
-    state_5.o(.text) refers (Special) to startup.o(.text) for State_0_Msg
-    state_5.o(.text) refers to lcd.o(.text) for LCD_Print_Char
-    state_5.o(.text) refers to utils.o(.text) for SysTick_Wait1ms
-    state_5.o(.text) refers to keyboard.o(.text) for Keyboard_Read
+    pratica2.o(.text) refers to final_states.o(.text) for State_5_a
     state_machine.o(.text) refers (Special) to startup.o(.text) for State_5_a_Msg
     state_machine.o(.text) refers to lcd.o(.text) for LCD_Print_Char
     state_machine.o(.text) refers to keyboard.o(.text) for Keyboard_Read
     state_machine.o(.text) refers to utils.o(.text) for SysTick_Wait1ms
+    final_states.o(.text) refers (Special) to startup.o(.text) for State_0_Msg
+    final_states.o(.text) refers to lcd.o(.text) for LCD_Print_Char
+    final_states.o(.text) refers to utils.o(.text) for SysTick_Wait1ms
+    final_states.o(.text) refers to keyboard.o(.text) for Keyboard_Read
 
 
 ==============================================================================
@@ -42,6 +42,7 @@ Image Symbol Table
 
     Symbol Name                              Value     Ov Type        Size  Object(Section)
 
+    src/final_states.s                       0x00000000   Number         0  final_states.o ABSOLUTE
     src/gpio_modificado.s                    0x00000000   Number         0  gpio_modificado.o ABSOLUTE
     src/interrupt.s                          0x00000000   Number         0  interrupt.o ABSOLUTE
     src/keyboard.s                           0x00000000   Number         0  keyboard.o ABSOLUTE
@@ -49,7 +50,6 @@ Image Symbol Table
     src/pratica2.s                           0x00000000   Number         0  pratica2.o ABSOLUTE
     src/ram_init.s                           0x00000000   Number         0  ram_init.o ABSOLUTE
     src/startup.s                            0x00000000   Number         0  startup.o ABSOLUTE
-    src/state_5.s                            0x00000000   Number         0  state_5.o ABSOLUTE
     src/state_machine.s                      0x00000000   Number         0  state_machine.o ABSOLUTE
     src/utils.s                              0x00000000   Number         0  utils.o ABSOLUTE
     RESET                                    0x00000000   Section      544  startup.o(RESET)
@@ -70,10 +70,10 @@ Image Symbol Table
     .text                                    0x00000a04   Section      108  pratica2.o(.text)
     $v0                                      0x00000a70   Number         0  gpio_modificado.o(.text)
     .text                                    0x00000a70   Section      452  gpio_modificado.o(.text)
-    $v0                                      0x00000c34   Number         0  state_5.o(.text)
-    .text                                    0x00000c34   Section      784  state_5.o(.text)
-    $v0                                      0x00000f44   Number         0  state_machine.o(.text)
-    .text                                    0x00000f44   Section      836  state_machine.o(.text)
+    $v0                                      0x00000c34   Number         0  state_machine.o(.text)
+    .text                                    0x00000c34   Section      836  state_machine.o(.text)
+    $v0                                      0x00000f78   Number         0  final_states.o(.text)
+    .text                                    0x00000f78   Section      784  final_states.o(.text)
     StackMem                                 0x20000000   Data           0  startup.o(STACK)
     STACK                                    0x20000000   Section     1024  startup.o(STACK)
 
@@ -206,22 +206,22 @@ Image Symbol Table
     State_5_a_Msg                            0x000007d3   Data          14  startup.o(.text)
     State_5_b_Msg                            0x000007e1   Data          25  startup.o(.text)
     State_5_c_Msg                            0x000007fa   Data          14  startup.o(.text)
-    State_5_d_Msg                            0x00000808   Data          22  startup.o(.text)
+    State_6_Msg                              0x00000808   Data          22  startup.o(.text)
     PLL_Init                                 0x00000821   Thumb Code     0  utils.o(.text)
     SysTick_Init                             0x00000949   Thumb Code     0  utils.o(.text)
     SysTick_Wait1ms                          0x00000983   Thumb Code     0  utils.o(.text)
     SysTick_Wait1us                          0x00000995   Thumb Code     0  utils.o(.text)
     Start                                    0x00000a05   Thumb Code     0  pratica2.o(.text)
     GPIO_Init                                0x00000a71   Thumb Code     0  gpio_modificado.o(.text)
-    State_5_a                                0x00000c35   Thumb Code     0  state_5.o(.text)
-    State_5_b                                0x00000cab   Thumb Code     0  state_5.o(.text)
-    State_5_c                                0x00000d45   Thumb Code     0  state_5.o(.text)
-    State_5_d                                0x00000d85   Thumb Code     0  state_5.o(.text)
-    State_0                                  0x00000f45   Thumb Code     0  state_machine.o(.text)
-    State_1                                  0x00000f8b   Thumb Code     0  state_machine.o(.text)
-    State_2                                  0x00000ff5   Thumb Code     0  state_machine.o(.text)
-    State_3                                  0x00001035   Thumb Code     0  state_machine.o(.text)
-    State_4_Init                             0x0000109f   Thumb Code     0  state_machine.o(.text)
+    State_0                                  0x00000c35   Thumb Code     0  state_machine.o(.text)
+    State_1                                  0x00000c7b   Thumb Code     0  state_machine.o(.text)
+    State_2                                  0x00000ce5   Thumb Code     0  state_machine.o(.text)
+    State_3                                  0x00000d25   Thumb Code     0  state_machine.o(.text)
+    State_4_Init                             0x00000d8f   Thumb Code     0  state_machine.o(.text)
+    State_5_a                                0x00000f79   Thumb Code     0  final_states.o(.text)
+    State_5_b                                0x00000fef   Thumb Code     0  final_states.o(.text)
+    State_5_c                                0x00001089   Thumb Code     0  final_states.o(.text)
+    State_6                                  0x000010c9   Thumb Code     0  final_states.o(.text)
 
 
 
@@ -246,8 +246,8 @@ Memory Map of the image
     0x00000820   0x00000820   0x000001e4   Code   RO           24    .text               utils.o
     0x00000a04   0x00000a04   0x0000006c   Code   RO           27    .text               pratica2.o
     0x00000a70   0x00000a70   0x000001c4   Code   RO           30    .text               gpio_modificado.o
-    0x00000c34   0x00000c34   0x00000310   Code   RO           33    .text               state_5.o
-    0x00000f44   0x00000f44   0x00000344   Code   RO           36    .text               state_machine.o
+    0x00000c34   0x00000c34   0x00000344   Code   RO           33    .text               state_machine.o
+    0x00000f78   0x00000f78   0x00000310   Code   RO           36    .text               final_states.o
 
 
     Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x00001288, Size: 0x00000000, Max: 0xffffffff, ABSOLUTE)
@@ -269,6 +269,7 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
+       784        102          0          0          0        528   final_states.o
        452        158          0          0          0        376   gpio_modificado.o
        200         46          0          0          0        348   interrupt.o
        376         18          0          0          0        372   keyboard.o
@@ -276,12 +277,11 @@ Image component sizes
        108          6          0          0          0        276   pratica2.o
        340        114          0          0          0        332   ram_init.o
        708        658          0          0       1024       1048   startup.o
-       784        102          0          0          0        520   state_5.o
        836        100          0          0          0        576   state_machine.o
        484         92          0          0          0        408   utils.o
 
     ----------------------------------------------------------------------
-      4744       1314          0          0       1024       4644   Object Totals
+      4744       1314          0          0       1024       4652   Object Totals
          0          0          0          0          0          0   (incl. Generated)
          0          0          0          0          0          0   (incl. Padding)
 
@@ -296,8 +296,8 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      4744       1314          0          0       1024       4644   Grand Totals
-      4744       1314          0          0       1024       4644   ELF Image Totals
+      4744       1314          0          0       1024       4652   Grand Totals
+      4744       1314          0          0       1024       4652   ELF Image Totals
       4744       1314          0          0          0          0   ROM Totals
 
 ==============================================================================

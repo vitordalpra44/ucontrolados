@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\pratica2.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\pratica2.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6210000: Last Updated: Sun May  5 21:35:40 2024
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6210000: Last Updated: Mon May  6 21:25:09 2024
 <BR><P>
 <H3>Maximum Stack Usage =          0 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -30,15 +30,15 @@ Functions with no stack information
  <LI><a href="#[6f]">SysTick_Wait1us</a>
  <LI><a href="#[6b]">Start</a>
  <LI><a href="#[73]">GPIO_Init</a>
- <LI><a href="#[7b]">State_5_a</a>
- <LI><a href="#[7c]">State_5_b</a>
- <LI><a href="#[7d]">State_5_c</a>
- <LI><a href="#[7e]">State_5_d</a>
  <LI><a href="#[76]">State_0</a>
  <LI><a href="#[77]">State_1</a>
  <LI><a href="#[78]">State_2</a>
  <LI><a href="#[79]">State_3</a>
  <LI><a href="#[7a]">State_4_Init</a>
+ <LI><a href="#[7b]">State_5_a</a>
+ <LI><a href="#[7c]">State_5_b</a>
+ <LI><a href="#[7d]">State_5_c</a>
+ <LI><a href="#[7e]">State_6</a>
 </UL>
 </UL>
 <P>
@@ -543,7 +543,7 @@ Global Symbols
 <P><STRONG><a name="[6c]"></a>Keyboard_Read</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, keyboard.o(.text))
 <BR><BR>[Calls]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Wait1ms
 </UL>
-<BR>[Called By]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;State_5_d
+<BR>[Called By]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;State_6
 <LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;State_5_b
 <LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;State_4_Init
 <LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;State_1
@@ -560,7 +560,7 @@ Global Symbols
 <BR><BR>[Calls]<UL><LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Wait1us
 <LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;State_5_d
+<BR>[Called By]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;State_6
 <LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;State_5_c
 <LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;State_5_b
 <LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;State_5_a
@@ -592,7 +592,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[6d]"></a>SysTick_Wait1ms</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, utils.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;State_5_d
+<BR><BR>[Called By]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;State_6
 <LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;State_5_c
 <LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;State_5_a
 <LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;State_2
@@ -605,7 +605,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[6b]"></a>Start</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, pratica2.o(.text))
-<BR><BR>[Calls]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;State_5_d
+<BR><BR>[Calls]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;State_6
 <LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;State_5_c
 <LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;State_5_b
 <LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;State_5_a
@@ -626,35 +626,6 @@ Global Symbols
 
 <P><STRONG><a name="[73]"></a>GPIO_Init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, gpio_modificado.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Start
-</UL>
-
-<P><STRONG><a name="[7b]"></a>State_5_a</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, state_5.o(.text))
-<BR><BR>[Calls]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Print_Char
-<LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Wait1ms
-</UL>
-<BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Start
-</UL>
-
-<P><STRONG><a name="[7c]"></a>State_5_b</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, state_5.o(.text))
-<BR><BR>[Calls]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Print_Char
-<LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Keyboard_Read
-</UL>
-<BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Start
-</UL>
-
-<P><STRONG><a name="[7d]"></a>State_5_c</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, state_5.o(.text))
-<BR><BR>[Calls]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Print_Char
-<LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Wait1ms
-</UL>
-<BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Start
-</UL>
-
-<P><STRONG><a name="[7e]"></a>State_5_d</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, state_5.o(.text))
-<BR><BR>[Calls]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Print_Char
-<LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Wait1ms
-<LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Keyboard_Read
-</UL>
-<BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Start
 </UL>
 
 <P><STRONG><a name="[76]"></a>State_0</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, state_machine.o(.text))
@@ -690,6 +661,35 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;State_4_Init
 <LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Start
+</UL>
+
+<P><STRONG><a name="[7b]"></a>State_5_a</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, final_states.o(.text))
+<BR><BR>[Calls]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Print_Char
+<LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Wait1ms
+</UL>
+<BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Start
+</UL>
+
+<P><STRONG><a name="[7c]"></a>State_5_b</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, final_states.o(.text))
+<BR><BR>[Calls]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Print_Char
+<LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Keyboard_Read
+</UL>
+<BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Start
+</UL>
+
+<P><STRONG><a name="[7d]"></a>State_5_c</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, final_states.o(.text))
+<BR><BR>[Calls]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Print_Char
+<LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Wait1ms
+</UL>
+<BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Start
+</UL>
+
+<P><STRONG><a name="[7e]"></a>State_6</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, final_states.o(.text))
+<BR><BR>[Calls]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Print_Char
+<LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Wait1ms
+<LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Keyboard_Read
+</UL>
+<BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Start
 </UL>
 <P>
 <H3>

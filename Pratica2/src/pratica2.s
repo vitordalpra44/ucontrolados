@@ -189,7 +189,6 @@ VAULT_STATE				EQU	   0X2000041C
 		IMPORT PLL_Init
 		IMPORT SysTick_Init
 		IMPORT LCD_Init
-		IMPORT Interrupt_Init
 		IMPORT Ram_Init
 		IMPORT State_0
 		IMPORT State_1
@@ -199,7 +198,8 @@ VAULT_STATE				EQU	   0X2000041C
 		IMPORT State_5_a
 		IMPORT State_5_b
 		IMPORT State_5_c
-		IMPORT State_5_d
+		IMPORT State_6
+		IMPORT Interrupt_Init	
 ;--------------------------------------------------------------------------------
 ; Função main
 Start
@@ -239,7 +239,7 @@ MainLoop
 	BLEQ State_5_c
 	
 	CMP R1, #8
-	BLEQ State_5_d
+	BLEQ State_6
 	
 	B MainLoop
 	

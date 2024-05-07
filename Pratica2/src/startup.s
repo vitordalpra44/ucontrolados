@@ -1,29 +1,3 @@
-; <<< Use Configuration Wizard in Context Menu >>>
-;******************************************************************************
-;
-; startup_rvmdk.S - Startup code for use with Keil's uVision.
-;
-; Copyright (c) 2014 Texas Instruments Incorporated.  All rights reserved.
-; Software License Agreement
-;
-; Texas Instruments (TI) is supplying this software for use solely and
-; exclusively on TI's microcontroller products. The software is owned by
-; TI and/or its suppliers, and is protected under applicable copyright
-; laws. You may not combine this software with "viral" open-source
-; software in order to form a larger program.
-;
-; THIS SOFTWARE IS PROVIDED "AS IS" AND WITH ALL FAULTS.
-; NO WARRANTIES, WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING, BUT
-; NOT LIMITED TO, IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-; A PARTICULAR PURPOSE APPLY TO THIS SOFTWARE. TI SHALL NOT, UNDER ANY
-; CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL, OR CONSEQUENTIAL
-; DAMAGES, FOR ANY REASON WHATSOEVER.
-;
-; This is part of revision 2.1.0.12573 of the EK-TM4C1294XL Firmware Package.
-;
-;******************************************************************************
-;******************************************************************************
-;
 ; <o> Stack Size (in Bytes) <0x0-0xFFFFFFFF:8>
 ;
 ;******************************************************************************
@@ -533,7 +507,7 @@ I2C9_Handler
 		EXPORT  State_5_a_Msg
 		EXPORT  State_5_b_Msg
 		EXPORT  State_5_c_Msg
-		EXPORT  State_5_d_Msg
+		EXPORT  State_6_Msg
 
 ;*********** DisableInterrupts ***************
 ; disable interrupts
@@ -583,7 +557,7 @@ State_3_Msg		DCB		"Cofre fechado",0
 State_5_a_Msg	DCB		"Cofre travado",0
 State_5_b_Msg	DCB		"Digite nova senha mestra",0
 State_5_c_Msg	DCB		"Cofre abrindo",0
-State_5_d_Msg	DCB		"Insira a senha mestra",0
+State_6_Msg		DCB		"Insira a senha mestra",0
 ;******************************************************************************
 ;
 ; Make sure the end of this section is aligned.
