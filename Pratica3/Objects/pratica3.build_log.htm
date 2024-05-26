@@ -1,0 +1,181 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: µVision V5.39.0.0
+Copyright (C) 2023 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: VItor Dalpra
+UTFPR
+User-based license: Keil MDK Community (non-commercial free of charge)
+Valid until: May 31 2033. Cached until: Jun 2 2024
+ 
+Tool Versions:
+Toolchain:       Keil MDK Community (non-commercial free of charge  Version: 5.39.0.0
+Toolchain Path:  C:\Keil_v5\ARM\ARMCLANG\Bin
+C Compiler:      ArmClang.exe V6.21
+Assembler:       Armasm.exe V6.21
+Linker/Locator:  ArmLink.exe V6.21
+Library Manager: ArmAr.exe V6.21
+Hex Converter:   FromElf.exe V6.21
+CPU DLL:         SARMCM3.DLL V5.39.0.0
+Dialog DLL:      DCM.DLL V1.17.5.0
+Target DLL:      lmidk-agdi.dll V???
+Dialog DLL:      TCM.DLL V1.56.4.0
+ 
+<h2>Project:</h2>
+C:\Users\vitor\Desktop\ucontrolados\Pratica3\pratica3.uvprojx
+Project File Date:  05/26/2024
+
+<h2>Output:</h2>
+*** Using Compiler 'V6.21', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
+Build target 'Target 1'
+src/main.c(23): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+   23 | void Timer0A_Handler();
+      |                     ^
+      |                      void
+src/main.c(28): warning: invalid UTF-8 in comment [-Winvalid-utf8]
+   28 |     uint32_t clocks_per_sec = 80000000; // 80 MHz, ajustado para a sua configura<E7><E3>o de clock
+      |                                                                                 ^
+src/main.c(43): warning: signed shift result (0x80000000) sets the sign bit of the shift expression's type ('int') and becomes negative [-Wshift-sign-overflow]
+   43 |         NVIC_PRI4_R = (uint32_t) (4 << 29);
+      |                                   ~ ^  ~~
+src/main.c(58): warning: mixing declarations and code is incompatible with standards before C99 [-Wdeclaration-after-statement]
+   58 |         int i =0;
+      |             ^
+src/main.c(58): warning: unused variable 'i' [-Wunused-variable]
+   58 |         int i =0;
+      |             ^
+src/main.c(63): warning: 'return' will never be executed [-Wunreachable-code-return]
+   63 |         return 0;
+      |                ^
+6 warnings generated.
+compiling main.c...
+src/gpio.c(19): warning: invalid UTF-8 in comment [-Winvalid-utf8]
+   19 | // Fun<E7><E3>o GPIO_Init
+      |       ^
+src/gpio.c(21): warning: invalid UTF-8 in comment [-Winvalid-utf8]
+   21 | // Par<E2>metro de entrada: N<E3>o tem
+      |       ^
+src/gpio.c(21): warning: invalid UTF-8 in comment [-Winvalid-utf8]
+   21 | // Par<E2>metro de entrada: N<E3>o tem
+      |                              ^
+src/gpio.c(22): warning: invalid UTF-8 in comment [-Winvalid-utf8]
+   22 | // Par<E2>metro de sa<ED>da: N<E3>o tem
+      |       ^
+src/gpio.c(22): warning: invalid UTF-8 in comment [-Winvalid-utf8]
+   22 | // Par<E2>metro de sa<ED>da: N<E3>o tem
+      |                      ^
+src/gpio.c(22): warning: invalid UTF-8 in comment [-Winvalid-utf8]
+   22 | // Par<E2>metro de sa<ED>da: N<E3>o tem
+      |                               ^
+src/gpio.c(27): warning: invalid UTF-8 in comment [-Winvalid-utf8]
+   27 |         //1b.   ap<F3>s isso verificar no PRGPIO se a porta est<E1> pronta para uso.
+      |                   ^
+src/gpio.c(27): warning: invalid UTF-8 in comment [-Winvalid-utf8]
+   27 |         //1b.   ap<F3>s isso verificar no PRGPIO se a porta est<E1> pronta para uso.
+      |                                                                ^
+src/gpio.c(30): warning: invalid UTF-8 in comment [-Winvalid-utf8]
+   30 |         // 2. Limpar o AMSEL para desabilitar a anal<F3>gica
+      |                                                     ^
+src/gpio.c(28): warning: empty expression statement has no effect; remove unnecessary ';' to silence this warning [-Wextra-semi-stmt]
+   28 |   while((SYSCTL_PRGPIO_R & (GPIO_PORTJ | GPIO_PORTN) ) != (GPIO_PORTJ | GPIO_PORTN) ){};
+      |                                                                                        ^
+src/gpio.c(38): warning: invalid UTF-8 in comment [-Winvalid-utf8]
+   38 |         // 4. DIR para 0 se for entrada, 1 se for sa<ED>da
+      |                                                     ^
+src/gpio.c(42): warning: invalid UTF-8 in comment [-Winvalid-utf8]
+   42 |         // 5. Limpar os bits AFSEL para 0 para selecionar GPIO sem fun<E7><E3>o alternativa   
+      |                                                                       ^
+src/gpio.c(56): warning: invalid UTF-8 in comment [-Winvalid-utf8]
+   56 | // Fun<E7><E3>o PortJ_Input
+      |       ^
+src/gpio.c(57): warning: invalid UTF-8 in comment [-Winvalid-utf8]
+   57 | // L<EA> os valores de entrada do port J
+      |     ^
+src/gpio.c(58): warning: invalid UTF-8 in comment [-Winvalid-utf8]
+   58 | // Par<E2>metro de entrada: N<E3>o tem
+      |       ^
+src/gpio.c(58): warning: invalid UTF-8 in comment [-Winvalid-utf8]
+   58 | // Par<E2>metro de entrada: N<E3>o tem
+      |                              ^
+src/gpio.c(59): warning: invalid UTF-8 in comment [-Winvalid-utf8]
+   59 | // Par<E2>metro de sa<ED>da: o valor da leitura do port
+      |       ^
+src/gpio.c(59): warning: invalid UTF-8 in comment [-Winvalid-utf8]
+   59 | // Par<E2>metro de sa<ED>da: o valor da leitura do port
+      |                      ^
+src/gpio.c(23): warning: no previous prototype for function 'GPIO_Init' [-Wmissing-prototypes]
+   23 | void GPIO_Init(void)
+      |      ^
+src/gpio.c(23): note: declare 'static' if the function is not intended to be used outside of this translation unit
+   23 | void GPIO_Init(void)
+      | ^
+      | static 
+src/gpio.c(66): warning: invalid UTF-8 in comment [-Winvalid-utf8]
+   66 | // Fun<E7><E3>o PortN_Output
+      |       ^
+src/gpio.c(68): warning: invalid UTF-8 in comment [-Winvalid-utf8]
+   68 | // Par<E2>metro de entrada: Valor a ser escrito
+      |       ^
+src/gpio.c(69): warning: invalid UTF-8 in comment [-Winvalid-utf8]
+   69 | // Par<E2>metro de sa<ED>da: n<E3>o tem
+      |       ^
+src/gpio.c(69): warning: invalid UTF-8 in comment [-Winvalid-utf8]
+   69 | // Par<E2>metro de sa<ED>da: n<E3>o tem
+      |                      ^
+src/gpio.c(69): warning: invalid UTF-8 in comment [-Winvalid-utf8]
+   69 | // Par<E2>metro de sa<ED>da: n<E3>o tem
+      |                               ^
+src/gpio.c(60): warning: no previous prototype for function 'PortJ_Input' [-Wmissing-prototypes]
+   60 | uint32_t PortJ_Input(void)
+      |          ^
+src/gpio.c(60): note: declare 'static' if the function is not intended to be used outside of this translation unit
+   60 | uint32_t PortJ_Input(void)
+      | ^
+      | static 
+src/gpio.c(74): warning: invalid UTF-8 in comment [-Winvalid-utf8]
+   74 |     //para uma escrita amig<E1>vel nos bits 0 e 1
+      |                            ^
+src/gpio.c(76): warning: invalid UTF-8 in comment [-Winvalid-utf8]
+   76 |     //agora vamos fazer o OR com o valor recebido na fun<E7><E3>o
+      |                                                         ^
+src/gpio.c(70): warning: no previous prototype for function 'PortN_Output' [-Wmissing-prototypes]
+   70 | void PortN_Output(uint32_t valor)
+      |      ^
+src/gpio.c(70): note: declare 'static' if the function is not intended to be used outside of this translation unit
+   70 | void PortN_Output(uint32_t valor)
+      | ^
+      | static 
+src/gpio.c(86): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
+   86 | void Timer0A_Handler(){
+      |                     ^
+      |                      void
+src/gpio.c(86): warning: no previous prototype for function 'Timer0A_Handler' [-Wmissing-prototypes]
+   86 | void Timer0A_Handler(){
+      |      ^
+src/gpio.c(86): note: declare 'static' if the function is not intended to be used outside of this translation unit
+   86 | void Timer0A_Handler(){
+      | ^
+      | static 
+30 warnings generated.
+compiling gpio.c...
+linking...
+Program Size: Code=1880 RO-data=16 RW-data=0 ZI-data=1120  
+".\Objects\pratica3.axf" - 0 Error(s), 36 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: Keil
+                http://www.keil.com/pack/Keil.TM4C_DFP.1.1.0.pack
+                Keil::TM4C_DFP@1.1.0
+                Texas Instruments Tiva C Series Device Support and Examples
+
+<h2>Collection of Component include folders:</h2>
+  D:/Keil/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129
+
+<h2>Collection of Component Files used:</h2>
+Build Time Elapsed:  00:00:00
+</pre>
+</body>
+</html>

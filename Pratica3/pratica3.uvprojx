@@ -22,7 +22,7 @@
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
           <FlashDriverDll>UL2CM3(-S0 -C0 -P0 -FD20000000 -FC1000 -FN1 -FF0TM4C129_1024 -FS00 -FL0100000 -FP0($$Device:TM4C1294NCPDT$Flash\TM4C129_1024.FLM))</FlashDriverDll>
-          <DeviceId>7088</DeviceId>
+          <DeviceId>0</DeviceId>
           <RegisterFile>$$Device:TM4C1294NCPDT$Device\Include\TM4C129\TM4C129.h</RegisterFile>
           <MemoryEnv></MemoryEnv>
           <Cmp></Cmp>
@@ -30,7 +30,7 @@
           <Linker></Linker>
           <OHString></OHString>
           <InfinionOptionDll></InfinionOptionDll>
-          <SLE66CMisc>-DTM4C1294NCPDT</SLE66CMisc>
+          <SLE66CMisc></SLE66CMisc>
           <SLE66AMisc></SLE66AMisc>
           <SLE66LinkerMisc></SLE66LinkerMisc>
           <SFDFile>$$Device:TM4C1294NCPDT$SVD\TM4C129\TM4C1294NCPDT.svd</SFDFile>
@@ -49,7 +49,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\Objects\</OutputDirectory>
-          <OutputName>exemplo</OutputName>
+          <OutputName>pratica3</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
@@ -110,11 +110,11 @@
         </CommonProperty>
         <DllOption>
           <SimDllName>SARMCM3.DLL</SimDllName>
-          <SimDllArguments>-MPU</SimDllArguments>
+          <SimDllArguments>  -MPU</SimDllArguments>
           <SimDlgDll>DCM.DLL</SimDlgDll>
           <SimDlgDllArguments>-pCM4</SimDlgDllArguments>
           <TargetDllName>SARMCM3.DLL</TargetDllName>
-          <TargetDllArguments>-MPU</TargetDllArguments>
+          <TargetDllArguments> -MPU</TargetDllArguments>
           <TargetDlgDll>TCM.DLL</TargetDlgDll>
           <TargetDlgDllArguments>-pCM4</TargetDlgDllArguments>
         </DllOption>
@@ -314,7 +314,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>2</Optim>
+            <Optim>1</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -323,11 +323,11 @@
             <PlainCh>0</PlainCh>
             <Ropi>0</Ropi>
             <Rwpi>0</Rwpi>
-            <wLevel>3</wLevel>
+            <wLevel>2</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>1</uC99>
-            <uGnu>0</uGnu>
+            <uGnu>1</uGnu>
             <useXO>0</useXO>
             <v6Lang>3</v6Lang>
             <v6LangP>3</v6LangP>
@@ -362,7 +362,7 @@
             </VariousControls>
           </Aads>
           <LDads>
-            <umfTarg>0</umfTarg>
+            <umfTarg>1</umfTarg>
             <Ropi>0</Ropi>
             <Rwpi>0</Rwpi>
             <noStLib>0</noStLib>
@@ -382,7 +382,7 @@
       </TargetOption>
       <Groups>
         <Group>
-          <GroupName>New Group</GroupName>
+          <GroupName>Source Group 1</GroupName>
           <Files>
             <File>
               <FileName>utils.s</FileName>
@@ -425,14 +425,5 @@
     <components/>
     <files/>
   </RTE>
-
-  <LayerInfo>
-    <Layers>
-      <Layer>
-        <LayName>pratica3</LayName>
-        <LayPrjMark>1</LayPrjMark>
-      </Layer>
-    </Layers>
-  </LayerInfo>
 
 </Project>

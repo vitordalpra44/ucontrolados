@@ -78,12 +78,18 @@ void PortN_Output(uint32_t valor)
     GPIO_PORTN_DATA_R = temp; 
 }
 
+
+
+
+
 //Handler do timer acionado anteriormente
-void Timer0A_Handler(void){
-		TIMER0_ICR_R = 0x01; // tem que resetar essa flag
-		PortN_Output(3);
-		SysTick_Wait1ms(1000);
+void Timer0A_Handler(){
+		TIMER0_ICR_R = 0x1; // tem que resetar essa flag
+	if (GPIO_PORTN_DATA_R == 1)
 		PortN_Output(0);
+	else
+		PortN_Output(1);
+	
 }
 
 

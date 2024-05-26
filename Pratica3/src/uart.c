@@ -5,8 +5,10 @@
 
 
 #include <stdint.h>
+#ifndef TM4
+#define TM4
 #include "tm4c1294ncpdt.h"
-
+#endif
 
 #define GPIO_PORTA  (1) //bit 8
 
@@ -59,3 +61,4 @@ void Recepcao(char* var, uint8_t* flag_recebeu){
 		*var = UART0_DR_R;
 	}
 }
+
