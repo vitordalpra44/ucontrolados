@@ -11,7 +11,23 @@
   
 #define GPIO_PORTJ  (0x0100) //bit 8
 #define GPIO_PORTN  (0x1000) //bit 12
+#define GPIO_PORTA (0x1)
+#define GPIO_PORTQ (0x4000)
 
+#define GPIO_PORTH  (0x1 << 7)// bit 7  
+
+void PortH_Output(uint32_t valor)
+{
+    uint32_t temp;
+    // vamos zerar somente os bits menos significativos
+    // para uma escrita amigável nos bits 0 e 1
+    temp = GPIO_PORTH_AHB_DATA_R & 0x00;
+    // agora vamos fazer o OR com o valor recebido na função
+    temp = temp | valor;
+    GPIO_PORTH_AHB_DATA_R = temp;
+}
+
+extern uint8_t leds;
 
 void SysTick_Wait1ms(uint32_t delay);
 
@@ -23,29 +39,45 @@ void SysTick_Wait1ms(uint32_t delay);
 void GPIO_Init(void)
 {
 	//1a. Ativar o clock para a porta setando o bit correspondente no registrador RCGCGPIO
-	SYSCTL_RCGCGPIO_R = (GPIO_PORTJ | GPIO_PORTN);
+	SYSCTL_RCGCGPIO_R = (GPIO_PORTJ | GPIO_PORTN | GPIO_PORTA | GPIO_PORTQ);
 	//1b.   após isso verificar no PRGPIO se a porta está pronta para uso.
-  while((SYSCTL_PRGPIO_R & (GPIO_PORTJ | GPIO_PORTN) ) != (GPIO_PORTJ | GPIO_PORTN) ){};
+  while((SYSCTL_PRGPIO_R & (GPIO_PORTJ | GPIO_PORTN | GPIO_PORTA | GPIO_PORTQ) ) != (GPIO_PORTJ | GPIO_PORTN | GPIO_PORTA | GPIO_PORTQ) );
 	
 	// 2. Limpar o AMSEL para desabilitar a analógica
 	GPIO_PORTJ_AHB_AMSEL_R = 0x00;
 	GPIO_PORTN_AMSEL_R = 0x00;
+	GPIO_PORTA_AHB_AMSEL_R = 0x00;
+	GPIO_PORTQ_AMSEL_R = 0x00;
+	
 		
 	// 3. Limpar PCTL para selecionar o GPIO
 	GPIO_PORTJ_AHB_PCTL_R = 0x00;
 	GPIO_PORTN_PCTL_R = 0x00;
-
+	GPIO_PORTA_AHB_PCTL_R = 0;
+	GPIO_PORTQ_PCTL_R = 0;
 	// 4. DIR para 0 se for entrada, 1 se for saída
 	GPIO_PORTJ_AHB_DIR_R = 0x00;
 	GPIO_PORTN_DIR_R = 0x03; //BIT0 | BIT1
-		
+	GPIO_PORTA_AHB_DIR_R = 0xF0;
+	GPIO_PORTQ_DIR_R = 0xF;
+	
 	// 5. Limpar os bits AFSEL para 0 para selecionar GPIO sem função alternativa	
 	GPIO_PORTJ_AHB_AFSEL_R = 0x00;
 	GPIO_PORTN_AFSEL_R = 0x00; 
+	GPIO_PORTA_AHB_AFSEL_R = 0x00;
+	GPIO_PORTQ_AFSEL_R = 0x00;
+	
 		
 	// 6. Setar os bits de DEN para habilitar I/O digital	
 	GPIO_PORTJ_AHB_DEN_R = 0x03;   //Bit0 e bit1
 	GPIO_PORTN_DEN_R = 0x03; 		   //Bit0 e bit1
+	GPIO_PORTA_AHB_DEN_R = 0xF0;
+	GPIO_PORTQ_DEN_R = 0xF;
+	
+	
+	
+	
+	
 	
 	// 7. Habilitar resistor de pull-up interno, setar PUR para 1
 	GPIO_PORTJ_AHB_PUR_R = 0x03;   //Bit0 e bit1	
@@ -62,6 +94,11 @@ uint32_t PortJ_Input(void)
 	return GPIO_PORTJ_AHB_DATA_R;
 }
 
+void acenderLeds(uint8_t leds){
+	GPIO_PORTA_AHB_DATA_R = leds&0xF0;
+	GPIO_PORTQ_DATA_R = leds&0x0F;
+
+}
 // -------------------------------------------------------------------------------
 // Função PortN_Output
 // Escreve os valores no port N
@@ -82,14 +119,11 @@ void PortN_Output(uint32_t valor)
 
 
 
+
 //Handler do timer acionado anteriormente
 void Timer0A_Handler(){
 		TIMER0_ICR_R = 0x1; // tem que resetar essa flag
-	if (GPIO_PORTN_DATA_R == 1)
-		PortN_Output(0);
-	else
-		PortN_Output(1);
-	
+		acenderLeds(leds);
 }
 
 

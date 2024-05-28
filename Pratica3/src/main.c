@@ -9,6 +9,14 @@
 #define TM4
 #include "tm4c1294ncpdt.h"
 #endif
+#define LED0 0x1
+#define LED1 0x2
+#define LED2 0x4
+#define LED3 0x8
+#define LED4 0x10
+#define LED5 0x20
+#define LED6 0x40
+#define LED7 0x80
 
 void PLL_Init(void);
 void SysTick_Init(void);
@@ -23,6 +31,7 @@ void Recepcao(char* var, uint8_t* flag_recebeu);
 void Timer0A_Handler();
 uint32_t ms_2_clocks(uint16_t ms);
 void init_periodic_timer_0(uint32_t clocks);
+void rotate_step_motor(uint8_t direction, uint8_t speed);
 
 uint32_t ms_2_clocks(uint16_t ms){
     uint32_t clocks_per_sec = 80000000; // 80 MHz, ajustado para a sua configuração de clock
@@ -47,18 +56,39 @@ void init_periodic_timer_0(uint32_t clocks){
 }
 
 
+uint8_t leds = 0;
+
+
+
 int main(void)
 {
 	PLL_Init();
 	SysTick_Init();
 	GPIO_Init();
 	//UART_Init();
-	init_periodic_timer_0(ms_2_clocks(100));
+	init_periodic_timer_0(ms_2_clocks(1000));
 	//PortN_Output(1);
 	int i =0;
 	while (1)
 	{	
-//loop de cpu quente
+		if(leds == LED0)
+			leds = LED1;
+		else if (leds == LED1)
+			leds = LED2;
+		else if (leds == LED2)
+			leds = LED3;
+		else if (leds == LED3)
+			leds = LED4;
+		else if (leds == LED4)
+			leds = LED5;
+		else if (leds == LED5)
+			leds = LED6;
+		else if (leds == LED6)
+			leds = LED7;
+		else if (leds == LED7)
+			leds = LED0;
+		else
+			leds = LED0;
 	}
 	return 0;
 }

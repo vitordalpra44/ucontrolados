@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\pratica3.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\pratica3.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6210000: Last Updated: Sun May 26 19:18:59 2024
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6210000: Last Updated: Tue May 28 01:00:46 2024
 <BR><P>
 <H3>Maximum Stack Usage =         36 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -716,30 +716,30 @@ Global Symbols
 
 <P><STRONG><a name="[b6]"></a>__semihosting_library_function</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, indicate_semi.o(.text), UNUSED)
 
-<P><STRONG><a name="[82]"></a>GPIO_Init</STRONG> (Thumb, 156 bytes, Stack size 0 bytes, gpio.o(.text.GPIO_Init))
+<P><STRONG><a name="[82]"></a>GPIO_Init</STRONG> (Thumb, 270 bytes, Stack size 0 bytes, gpio.o(.text.GPIO_Init))
 <BR><BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[7f]"></a>PortN_Output</STRONG> (Thumb, 36 bytes, Stack size 8 bytes, gpio.o(.text.PortN_Output))
-<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = PortN_Output
+<P><STRONG><a name="[1d]"></a>Timer0A_Handler</STRONG> (Thumb, 28 bytes, Stack size 8 bytes, gpio.o(.text.Timer0A_Handler))
+<BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = Timer0A_Handler &rArr; acenderLeds
+</UL>
+<BR>[Calls]<UL><LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;acenderLeds
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
+</UL>
+<P><STRONG><a name="[7f]"></a>acenderLeds</STRONG> (Thumb, 46 bytes, Stack size 4 bytes, gpio.o(.text.acenderLeds))
+<BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = acenderLeds
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Timer0A_Handler
 </UL>
 
-<P><STRONG><a name="[1d]"></a>Timer0A_Handler</STRONG> (Thumb, 46 bytes, Stack size 8 bytes, gpio.o(.text.Timer0A_Handler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = Timer0A_Handler &rArr; PortN_Output
-</UL>
-<BR>[Calls]<UL><LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortN_Output
-</UL>
-<BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
-</UL>
 <P><STRONG><a name="[84]"></a>init_periodic_timer_0</STRONG> (Thumb, 134 bytes, Stack size 4 bytes, main.o(.text.init_periodic_timer_0))
 <BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = init_periodic_timer_0
 </UL>
 <BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[76]"></a>main</STRONG> (Thumb, 40 bytes, Stack size 24 bytes, main.o(.text.main))
+<P><STRONG><a name="[76]"></a>main</STRONG> (Thumb, 310 bytes, Stack size 24 bytes, main.o(.text.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 36 + Unknown Stack Size
 <LI>Call Chain = main &rArr; ms_2_clocks
 </UL>

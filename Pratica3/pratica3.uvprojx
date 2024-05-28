@@ -414,6 +414,11 @@
               <FileType>1</FileType>
               <FilePath>.\src\gpio.c</FilePath>
             </File>
+            <File>
+              <FileName>step_motor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\step_motor.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
@@ -425,5 +430,14 @@
     <components/>
     <files/>
   </RTE>
+
+  <LayerInfo>
+    <Layers>
+      <Layer>
+        <LayName>pratica3</LayName>
+        <LayPrjMark>1</LayPrjMark>
+      </Layer>
+    </Layers>
+  </LayerInfo>
 
 </Project>
