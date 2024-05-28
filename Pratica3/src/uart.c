@@ -25,40 +25,27 @@ void UART_Init(void)
 	//1b.   após isso verificar no PRGPIO se a porta está pronta para uso.
   while(SYSCTL_PRUART_R!= 1){};
 	UART0_CTL_R = 0;
-	UART0_IBRD_R = 86;
-	UART0_FBRD_R 	= 52;
+	UART0_IBRD_R = 43;
+	UART0_FBRD_R 	= 25;
 	UART0_LCRH_R = 0x78;
 	UART0_CC_R = 0;
 	UART0_CTL_R = 0x301;
 		
+}
 
-	//1a. Ativar o clock para a porta setando o bit correspondente no registrador RCGCGPIO
-	SYSCTL_RCGCGPIO_R = GPIO_PORTA;
-	//1b.   após isso verificar no PRGPIO se a porta está pronta para uso.
-  while((SYSCTL_PRGPIO_R & (GPIO_PORTA) ) != (GPIO_PORTA) ){};
-	
-	// 2. Limpar o AMSEL para desabilitar a analógica
-	GPIO_PORTA_AHB_AMSEL_R = 0x00;
-	GPIO_PORTA_AHB_PCTL_R = 0x11; // Setando função alternativa UART nos pinos PA1 e PA0
-		
-	GPIO_PORTA_AHB_AFSEL_R = 3;
-	GPIO_PORTA_AHB_DEN_R = 0x3;
-		
-		
-}	
 
 
 void Transmissao(char var){
 	if ((UART0_FR_R & 0x20) != 0x20){
 		UART0_DR_R = var;
 	}
-	
 }
 
-void Recepcao(char* var, uint8_t* flag_recebeu){
-	if (!(UART0_FR_R << 0xF & 1)){
-		*flag_recebeu = 1;
+uint8_t Recepcao(uint32_t *var){
+	if ((UART0_FR_R & 0x10) != 0x10){
 		*var = UART0_DR_R;
+		return 1;
 	}
+	return 0;
 }
 

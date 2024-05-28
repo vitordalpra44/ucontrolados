@@ -5,6 +5,7 @@
 // Prof. Guilherme Peron
 
 #include <stdint.h>
+#include <time.h>
 #ifndef TM4
 #define TM4
 #include "tm4c1294ncpdt.h"
@@ -25,17 +26,24 @@ void SysTick_Wait1us(uint32_t delay);
 void GPIO_Init(void);
 uint32_t PortJ_Input(void);
 void PortN_Output(uint32_t leds);
+
+
+
+
+
 void UART_Init(void);
-void Transmissao(char var);
-void Recepcao(char* var, uint8_t* flag_recebeu);
+void Transmissao(uint32_t var);
+uint8_t Recepcao(uint32_t* var);
 void Timer0A_Handler();
 uint32_t ms_2_clocks(uint16_t ms);
 void init_periodic_timer_0(uint32_t clocks);
-void rotate_step_motor(uint8_t direction, uint8_t speed);
 
-uint32_t ms_2_clocks(uint16_t ms){
-    uint32_t clocks_per_sec = 80000000; // 80 MHz, ajustado para a sua configuração de clock
-    uint32_t clocks = (clocks_per_sec * ms) / 1000;
+
+
+
+uint32_t sec_2_clocks(float seg){
+    uint32_t clocks_per_sec = 80000000;	// 80 MHz, ajustado para a sua configuração de clock
+    uint32_t clocks = clocks_per_sec * seg;
     return clocks;
 }
 //inicia um clock periodico no timer0 para com tempo de clocks
@@ -65,32 +73,16 @@ int main(void)
 	PLL_Init();
 	SysTick_Init();
 	GPIO_Init();
-	//UART_Init();
-	init_periodic_timer_0(ms_2_clocks(1000));
-	//PortN_Output(1);
-	int i =0;
+	UART_Init();
+	init_periodic_timer_0(sec_2_clocks(0.1));
+	uint32_t receb;
 	while (1)
 	{	
-		if(leds == LED0)
-			leds = LED1;
-		else if (leds == LED1)
-			leds = LED2;
-		else if (leds == LED2)
-			leds = LED3;
-		else if (leds == LED3)
-			leds = LED4;
-		else if (leds == LED4)
-			leds = LED5;
-		else if (leds == LED5)
-			leds = LED6;
-		else if (leds == LED6)
-			leds = LED7;
-		else if (leds == LED7)
-			leds = LED0;
-		else
-			leds = LED0;
+		if (Recepcao(&receb))
+			Transmissao(receb);
+				
+
 	}
-	return 0;
 }
 
 

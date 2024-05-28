@@ -8,7 +8,7 @@ Copyright (C) 2023 ARM Ltd and ARM Germany GmbH. All rights reserved.
 License Information: VItor Dalpra
 UTFPR
 User-based license: Keil MDK Community (non-commercial free of charge)
-Valid until: May 31 2033. Cached until: Jun 2 2024
+Valid until: May 31 2033. Cached until: Jun 3 2024
  
 Tool Versions:
 Toolchain:       Keil MDK Community (non-commercial free of charge  Version: 5.39.0.0
@@ -30,169 +30,59 @@ Project File Date:  05/28/2024
 <h2>Output:</h2>
 *** Using Compiler 'V6.21', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Build target 'Target 1'
-compiling step_motor.c...
-src/main.c(31): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
-   31 | void Timer0A_Handler();
-      |                     ^
-      |                      void
-src/main.c(37): warning: invalid UTF-8 in comment [-Winvalid-utf8]
-   37 |     uint32_t clocks_per_sec = 80000000; // 80 MHz, ajustado para a sua configura<E7><E3>o de clock
-      |                                                                                 ^
-src/main.c(52): warning: signed shift result (0x80000000) sets the sign bit of the shift expression's type ('int') and becomes negative [-Wshift-sign-overflow]
-   52 |         NVIC_PRI4_R = (uint32_t) (4 << 29);
-      |                                   ~ ^  ~~
-src/main.c(59): warning: no previous extern declaration for non-static variable 'leds' [-Wmissing-variable-declarations]
-   59 | uint8_t leds = 0;
-      |         ^
-src/main.c(59): note: declare 'static' if the variable is not intended to be used outside of this translation unit
-   59 | uint8_t leds = 0;
-      | ^
-src/main.c(71): warning: mixing declarations and code is incompatible with standards before C99 [-Wdeclaration-after-statement]
-   71 |         int i =0;
-      |             ^
-src/main.c(71): warning: unused variable 'i' [-Wunused-variable]
-   71 |         int i =0;
-      |             ^
-src/main.c(93): warning: 'return' will never be executed [-Wunreachable-code-return]
-   93 |         return 0;
-      |                ^
-7 warnings generated.
-compiling main.c...
-src/gpio.c(23): warning: invalid UTF-8 in comment [-Winvalid-utf8]
-   23 |     // para uma escrita amig<E1>vel nos bits 0 e 1
-      |                             ^
-src/gpio.c(25): warning: invalid UTF-8 in comment [-Winvalid-utf8]
-   25 |     // agora vamos fazer o OR com o valor recebido na fun<E7><E3>o
-      |                                                          ^
-src/gpio.c(19): warning: no previous prototype for function 'PortH_Output' [-Wmissing-prototypes]
-   19 | void PortH_Output(uint32_t valor)
-      |      ^
-src/gpio.c(19): note: declare 'static' if the function is not intended to be used outside of this translation unit
-   19 | void PortH_Output(uint32_t valor)
-      | ^
-      | static 
-src/gpio.c(35): warning: invalid UTF-8 in comment [-Winvalid-utf8]
-   35 | // Fun<E7><E3>o GPIO_Init
+src/uart.c(16): warning: invalid UTF-8 in comment [-Winvalid-utf8]
+   16 | // Fun<E7><E3>o GPIO_Init
       |       ^
-src/gpio.c(37): warning: invalid UTF-8 in comment [-Winvalid-utf8]
-   37 | // Par<E2>metro de entrada: N<E3>o tem
+src/uart.c(18): warning: invalid UTF-8 in comment [-Winvalid-utf8]
+   18 | // Par<E2>metro de entrada: N<E3>o tem
       |       ^
-src/gpio.c(37): warning: invalid UTF-8 in comment [-Winvalid-utf8]
-   37 | // Par<E2>metro de entrada: N<E3>o tem
+src/uart.c(18): warning: invalid UTF-8 in comment [-Winvalid-utf8]
+   18 | // Par<E2>metro de entrada: N<E3>o tem
       |                              ^
-src/gpio.c(38): warning: invalid UTF-8 in comment [-Winvalid-utf8]
-   38 | // Par<E2>metro de sa<ED>da: N<E3>o tem
+src/uart.c(19): warning: invalid UTF-8 in comment [-Winvalid-utf8]
+   19 | // Par<E2>metro de sa<ED>da: N<E3>o tem
       |       ^
-src/gpio.c(38): warning: invalid UTF-8 in comment [-Winvalid-utf8]
-   38 | // Par<E2>metro de sa<ED>da: N<E3>o tem
+src/uart.c(19): warning: invalid UTF-8 in comment [-Winvalid-utf8]
+   19 | // Par<E2>metro de sa<ED>da: N<E3>o tem
       |                      ^
-src/gpio.c(38): warning: invalid UTF-8 in comment [-Winvalid-utf8]
-   38 | // Par<E2>metro de sa<ED>da: N<E3>o tem
+src/uart.c(19): warning: invalid UTF-8 in comment [-Winvalid-utf8]
+   19 | // Par<E2>metro de sa<ED>da: N<E3>o tem
       |                               ^
-src/gpio.c(43): warning: invalid UTF-8 in comment [-Winvalid-utf8]
-   43 |         //1b.   ap<F3>s isso verificar no PRGPIO se a porta est<E1> pronta para uso.
+src/uart.c(25): warning: invalid UTF-8 in comment [-Winvalid-utf8]
+   25 |         //1b.   ap<F3>s isso verificar no PRGPIO se a porta est<E1> pronta para uso.
       |                   ^
-src/gpio.c(43): warning: invalid UTF-8 in comment [-Winvalid-utf8]
-   43 |         //1b.   ap<F3>s isso verificar no PRGPIO se a porta est<E1> pronta para uso.
+src/uart.c(25): warning: invalid UTF-8 in comment [-Winvalid-utf8]
+   25 |         //1b.   ap<F3>s isso verificar no PRGPIO se a porta est<E1> pronta para uso.
       |                                                                ^
-src/gpio.c(46): warning: invalid UTF-8 in comment [-Winvalid-utf8]
-   46 |         // 2. Limpar o AMSEL para desabilitar a anal<F3>gica
-      |                                                     ^
-src/gpio.c(58): warning: invalid UTF-8 in comment [-Winvalid-utf8]
-   58 |         // 4. DIR para 0 se for entrada, 1 se for sa<ED>da
-      |                                                     ^
-src/gpio.c(64): warning: invalid UTF-8 in comment [-Winvalid-utf8]
-   64 |         // 5. Limpar os bits AFSEL para 0 para selecionar GPIO sem fun<E7><E3>o alternativa   
-      |                                                                       ^
-src/gpio.c(88): warning: invalid UTF-8 in comment [-Winvalid-utf8]
-   88 | // Fun<E7><E3>o PortJ_Input
-      |       ^
-src/gpio.c(89): warning: invalid UTF-8 in comment [-Winvalid-utf8]
-   89 | // L<EA> os valores de entrada do port J
-      |     ^
-src/gpio.c(90): warning: invalid UTF-8 in comment [-Winvalid-utf8]
-   90 | // Par<E2>metro de entrada: N<E3>o tem
-      |       ^
-src/gpio.c(90): warning: invalid UTF-8 in comment [-Winvalid-utf8]
-   90 | // Par<E2>metro de entrada: N<E3>o tem
-      |                              ^
-src/gpio.c(91): warning: invalid UTF-8 in comment [-Winvalid-utf8]
-   91 | // Par<E2>metro de sa<ED>da: o valor da leitura do port
-      |       ^
-src/gpio.c(91): warning: invalid UTF-8 in comment [-Winvalid-utf8]
-   91 | // Par<E2>metro de sa<ED>da: o valor da leitura do port
-      |                      ^
-src/gpio.c(39): warning: no previous prototype for function 'GPIO_Init' [-Wmissing-prototypes]
-   39 | void GPIO_Init(void)
-      |      ^
-src/gpio.c(39): note: declare 'static' if the function is not intended to be used outside of this translation unit
-   39 | void GPIO_Init(void)
-      | ^
-      | static 
-src/gpio.c(92): warning: no previous prototype for function 'PortJ_Input' [-Wmissing-prototypes]
-   92 | uint32_t PortJ_Input(void)
-      |          ^
-src/gpio.c(92): note: declare 'static' if the function is not intended to be used outside of this translation unit
-   92 | uint32_t PortJ_Input(void)
-      | ^
-      | static 
-src/gpio.c(97): warning: declaration shadows a variable in the global scope [-Wshadow]
-   97 | void acenderLeds(uint8_t leds){
-      |                          ^
-src/gpio.c(30): note: previous declaration is here
-   30 | extern uint8_t leds;
-      |                ^
-src/gpio.c(103): warning: invalid UTF-8 in comment [-Winvalid-utf8]
-  103 | // Fun<E7><E3>o PortN_Output
-      |       ^
-src/gpio.c(105): warning: invalid UTF-8 in comment [-Winvalid-utf8]
-  105 | // Par<E2>metro de entrada: Valor a ser escrito
-      |       ^
-src/gpio.c(106): warning: invalid UTF-8 in comment [-Winvalid-utf8]
-  106 | // Par<E2>metro de sa<ED>da: n<E3>o tem
-      |       ^
-src/gpio.c(106): warning: invalid UTF-8 in comment [-Winvalid-utf8]
-  106 | // Par<E2>metro de sa<ED>da: n<E3>o tem
-      |                      ^
-src/gpio.c(106): warning: invalid UTF-8 in comment [-Winvalid-utf8]
-  106 | // Par<E2>metro de sa<ED>da: n<E3>o tem
+src/uart.c(26): warning: empty expression statement has no effect; remove unnecessary ';' to silence this warning [-Wextra-semi-stmt]
+   26 |   while(SYSCTL_PRUART_R!= 1){};
       |                               ^
-src/gpio.c(97): warning: no previous prototype for function 'acenderLeds' [-Wmissing-prototypes]
-   97 | void acenderLeds(uint8_t leds){
+src/uart.c(20): warning: no previous prototype for function 'UART_Init' [-Wmissing-prototypes]
+   20 | void UART_Init(void)
       |      ^
-src/gpio.c(97): note: declare 'static' if the function is not intended to be used outside of this translation unit
-   97 | void acenderLeds(uint8_t leds){
+src/uart.c(20): note: declare 'static' if the function is not intended to be used outside of this translation unit
+   20 | void UART_Init(void)
       | ^
       | static 
-src/gpio.c(111): warning: invalid UTF-8 in comment [-Winvalid-utf8]
-  111 |     //para uma escrita amig<E1>vel nos bits 0 e 1
-      |                            ^
-src/gpio.c(113): warning: invalid UTF-8 in comment [-Winvalid-utf8]
-  113 |     //agora vamos fazer o OR com o valor recebido na fun<E7><E3>o
-      |                                                         ^
-src/gpio.c(107): warning: no previous prototype for function 'PortN_Output' [-Wmissing-prototypes]
-  107 | void PortN_Output(uint32_t valor)
+src/uart.c(38): warning: no previous prototype for function 'Transmissao' [-Wmissing-prototypes]
+   38 | void Transmissao(char var){
       |      ^
-src/gpio.c(107): note: declare 'static' if the function is not intended to be used outside of this translation unit
-  107 | void PortN_Output(uint32_t valor)
+src/uart.c(38): note: declare 'static' if the function is not intended to be used outside of this translation unit
+   38 | void Transmissao(char var){
       | ^
       | static 
-src/gpio.c(124): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
-  124 | void Timer0A_Handler(){
-      |                     ^
-      |                      void
-src/gpio.c(124): warning: no previous prototype for function 'Timer0A_Handler' [-Wmissing-prototypes]
-  124 | void Timer0A_Handler(){
-      |      ^
-src/gpio.c(124): note: declare 'static' if the function is not intended to be used outside of this translation unit
-  124 | void Timer0A_Handler(){
+src/uart.c(44): warning: no previous prototype for function 'Recepcao' [-Wmissing-prototypes]
+   44 | uint8_t Recepcao(uint32_t *var){
+      |         ^
+src/uart.c(44): note: declare 'static' if the function is not intended to be used outside of this translation unit
+   44 | uint8_t Recepcao(uint32_t *var){
       | ^
       | static 
-34 warnings generated.
-compiling gpio.c...
+12 warnings generated.
+compiling uart.c...
 linking...
-Program Size: Code=2260 RO-data=16 RW-data=0 ZI-data=1128  
-".\Objects\pratica3.axf" - 0 Error(s), 41 Warning(s).
+Program Size: Code=2500 RO-data=16 RW-data=0 ZI-data=1128  
+".\Objects\pratica3.axf" - 0 Error(s), 12 Warning(s).
 
 <h2>Software Packages used:</h2>
 
