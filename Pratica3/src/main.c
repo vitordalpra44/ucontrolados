@@ -6,6 +6,7 @@
 
 #include <stdint.h>
 #include <time.h>
+#include "step_motor.h"
 #ifndef TM4
 #define TM4
 #include "tm4c1294ncpdt.h"
@@ -27,19 +28,12 @@ void GPIO_Init(void);
 uint32_t PortJ_Input(void);
 void PortN_Output(uint32_t leds);
 
-
-
-
-
 void UART_Init(void);
 void Transmissao(uint32_t var);
 uint8_t Recepcao(uint32_t* var);
 void Timer0A_Handler();
 uint32_t ms_2_clocks(uint16_t ms);
 void init_periodic_timer_0(uint32_t clocks);
-
-
-
 
 uint32_t sec_2_clocks(float seg){
     uint32_t clocks_per_sec = 80000000;	// 80 MHz, ajustado para a sua configuração de clock
@@ -60,13 +54,37 @@ void init_periodic_timer_0(uint32_t clocks){
 	NVIC_PRI4_R = (uint32_t) (4 << 29);
 	NVIC_EN0_R = 1 << 19;
 	TIMER0_CTL_R = 0x1;
-
 }
 
-
 uint8_t leds = 0;
+uint8_t pisca = 0;
+uint8_t set_direction(){
+    //Pede pro terminal retornar a direção desejada
+    return '0';
+}
 
+uint8_t set_speed(){
+    //Pede pro terminal retornar a velocidade desejada
+    return '1';
+}
 
+uint8_t set_laps(){
+    //Pede pro terminal retornar a quantidade de voltas desejada
+    return 2;
+}
+
+void step_motor_manager(){
+    //Direction: 0 - Clockwise, 1 - Counterclockwise
+    //Speed: 0 - Halfstep, 1 - Fullstep
+    //Unipolar
+    //Quantidade de passos para volta: 2048
+    uint8_t direction = set_direction();
+    uint8_t speed = set_speed();
+    uint8_t laps = set_laps();
+    for(int i = laps; i > 0; i--){
+        rotate_step_motor(direction, speed);
+    }
+}
 
 int main(void)
 {
@@ -76,12 +94,11 @@ int main(void)
 	UART_Init();
 	init_periodic_timer_0(sec_2_clocks(0.1));
 	uint32_t receb;
+	step_motor_manager();
 	while (1)
 	{	
 		if (Recepcao(&receb))
 			Transmissao(receb);
-				
-
 	}
 }
 

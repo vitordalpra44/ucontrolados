@@ -11,7 +11,6 @@
 #endif
 
 #define GPIO_PORTA  (1) //bit 8
-
 // -------------------------------------------------------------------------------
 // Função GPIO_Init
 // Inicializa os ports J e N
@@ -35,7 +34,7 @@ void UART_Init(void)
 
 
 
-void Transmissao(char var){
+void Transmissao(unsigned char var){
 	if ((UART0_FR_R & 0x20) != 0x20){
 		UART0_DR_R = var;
 	}
