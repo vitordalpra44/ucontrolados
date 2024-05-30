@@ -323,7 +323,7 @@
             <PlainCh>0</PlainCh>
             <Ropi>0</Ropi>
             <Rwpi>0</Rwpi>
-            <wLevel>2</wLevel>
+            <wLevel>1</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>1</uC99>
@@ -413,6 +413,16 @@
               <FileName>gpio.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\src\gpio.c</FilePath>
+            </File>
+            <File>
+              <FileName>step_motor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\step_motor.c</FilePath>
+            </File>
+            <File>
+              <FileName>step_motor.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\step_motor.h</FilePath>
             </File>
           </Files>
         </Group>

@@ -5,86 +5,59 @@
 // Prof. Guilherme Peron
 
 #include <stdint.h>
+#include <stdio.h>
 #include <time.h>
+#include <string.h>
+#include <stdlib.h>
 #include "step_motor.h"
 #ifndef TM4
 #define TM4
 #include "tm4c1294ncpdt.h"
 #endif
-#define LED0 0x1
-#define LED1 0x2
-#define LED2 0x4
-#define LED3 0x8
-#define LED4 0x10
-#define LED5 0x20
-#define LED6 0x40
-#define LED7 0x80
+
+#define loop_principal "\
+\n\r\
+-------------------------------------------------------------------------\n\r\
+                       BEM VINDO AO GERENCIADOR DE MOTOR                 \n\r\
+-------------------------------------------------------------------------\n\r\
+1. Ver valores setados (velocidade, direcao e voltas)\n\r\
+2. Setar velocidade\n\r\
+3. Setar direcao\n\r\
+4. Setar voltas\n\r\
+5. Acionar o motor\n\r\
+\n\r\
+Digite: \
+"
+#define escolha_errada "\n\r\
+Opcao inexistente...\
+"
+#define dividir_secao "\
+\n\r\
+-------------------------------------------------------------------------"
+#define setar_velocidade "\n\rSETANDO VELOCIDADE  (0 - meio passo, 1 - passo completo)\n\rValor: "
+#define setar_direcao "\n\rSETANDO DIRECAO  (0 - horario, 1 - anti-horario)\n\rValor: "
+#define setar_voltas "\n\rSETANDO VOLTAS (min 1, max 10) \n\rValor: "
 
 void PLL_Init(void);
 void SysTick_Init(void);
 void SysTick_Wait1ms(uint32_t delay);
-void SysTick_Wait1us(uint32_t delay);
 void GPIO_Init(void);
-uint32_t PortJ_Input(void);
-void PortN_Output(uint32_t leds);
-
 void UART_Init(void);
-void Transmissao(uint32_t var);
-uint8_t Recepcao(uint32_t* var);
-void Timer0A_Handler();
-uint32_t ms_2_clocks(uint16_t ms);
+void Recepcao(uint32_t* var);
+uint32_t sec_2_clocks(float sec);
 void init_periodic_timer_0(uint32_t clocks);
+void EnviarString(unsigned char* string);
+void Timer0A_Handler();
 
-uint32_t sec_2_clocks(float seg){
-    uint32_t clocks_per_sec = 80000000;	// 80 MHz, ajustado para a sua configuração de clock
-    uint32_t clocks = clocks_per_sec * seg;
-    return clocks;
-}
-//inicia um clock periodico no timer0 para com tempo de clocks
-void init_periodic_timer_0(uint32_t clocks){
-	SYSCTL_RCGCTIMER_R = 1;
-	while ((SYSCTL_PRTIMER_R & 0x1) != 1);
-	TIMER0_CTL_R = 0;
-	TIMER0_CFG_R = 0;
-	TIMER0_TAMR_R = 0x2;
-	TIMER0_TAILR_R = clocks;
-	TIMER0_TAPR_R = 0;
-	TIMER0_ICR_R = 1;
-	TIMER0_IMR_R = 1;
-	NVIC_PRI4_R = (uint32_t) (4 << 29);
-	NVIC_EN0_R = 1 << 19;
-	TIMER0_CTL_R = 0x1;
-}
 
 uint8_t leds = 0;
 uint8_t pisca = 0;
-uint8_t set_direction(){
-    //Pede pro terminal retornar a direção desejada
-    return '0';
-}
+uint32_t velocidade = '1';
+uint32_t direcao = '0';
+uint32_t voltas = 1;
 
-uint8_t set_speed(){
-    //Pede pro terminal retornar a velocidade desejada
-    return '1';
-}
+int8_t verificaDec(uint32_t dec) {return (dec == '0' || dec == '1' || dec == '2' || dec == '3' || dec == '4' || dec == '5' ||dec == '6' || dec == '7' ||dec == '8' || dec == '9');}
 
-uint8_t set_laps(){
-    //Pede pro terminal retornar a quantidade de voltas desejada
-    return 2;
-}
-
-void step_motor_manager(){
-    //Direction: 0 - Clockwise, 1 - Counterclockwise
-    //Speed: 0 - Halfstep, 1 - Fullstep
-    //Unipolar
-    //Quantidade de passos para volta: 2048
-    uint8_t direction = set_direction();
-    uint8_t speed = set_speed();
-    uint8_t laps = set_laps();
-    for(int i = laps; i > 0; i--){
-        rotate_step_motor(direction, speed);
-    }
-}
 
 int main(void)
 {
@@ -93,12 +66,77 @@ int main(void)
 	GPIO_Init();
 	UART_Init();
 	init_periodic_timer_0(sec_2_clocks(0.1));
-	uint32_t receb;
-	step_motor_manager();
+	uint32_t retcode = 0, retcode2=0;
+	unsigned char buffer[200] = {0};
+
 	while (1)
 	{	
-		if (Recepcao(&receb))
-			Transmissao(receb);
+		EnviarString(loop_principal);
+		Recepcao(&retcode);
+		EnviarString(dividir_secao);
+		if (retcode == '1'){
+			snprintf((char *) buffer, 200, "\n\rVelocidade: %c\n\rVoltas: %d\n\rDirecao: %c", velocidade, voltas, direcao);
+			EnviarString(buffer);		
+			memset(buffer, 0, 200);
+			
+		}else if (retcode == '2'){
+			EnviarString(setar_velocidade);
+			Recepcao(&retcode);
+			if (retcode == '0') velocidade = '0';
+			else if (retcode == '1') velocidade = '1';
+			else{ 
+				EnviarString(escolha_errada);
+				continue;
+			}
+			EnviarString("\n\rValor alterado com sucesso");
+
+		}else if (retcode == '3'){
+			EnviarString(setar_direcao);
+			Recepcao(&retcode);
+			if (retcode == '0') direcao = '0';
+			else if (retcode == '1') direcao = '1';
+			else{ 
+				EnviarString(escolha_errada);
+				continue;
+			}
+			EnviarString("\n\rValor alterado com sucesso");
+		}else if (retcode == '4'){
+			char voltas_char[2] = {0};
+				EnviarString(setar_voltas);
+				Recepcao(&retcode);
+				if ((!verificaDec(retcode))){
+						EnviarString(escolha_errada);
+						goto final;
+				}
+				voltas_char[0] = retcode;
+				Recepcao(&retcode2);
+				if ((!verificaDec(retcode2)) && retcode2 != 13){
+						EnviarString(escolha_errada);
+						goto final;
+				}else if (verificaDec(retcode2)){
+						voltas_char[1] = retcode2;
+				}
+				voltas = atoi(voltas_char);
+				if (voltas > 10){
+					voltas = 10;
+					EnviarString("\n\rSetando voltas para 10");
+				}else if (voltas == 0){
+					voltas = 1;
+					EnviarString("\n\rSetando voltas para 1");
+				}
+				EnviarString("\n\rValor alterado com sucesso");
+
+
+
+		}else if (retcode == '5'){
+				rotate_step_motor();
+				EnviarString("\n\rFIM");
+		}else{
+			EnviarString(escolha_errada);
+
+		}
+		final:
+		EnviarString("\n\r\n\r");
 	}
 }
 
