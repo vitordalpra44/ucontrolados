@@ -17,6 +17,7 @@ extern uint8_t leds;
 extern uint32_t velocidade;
 extern uint32_t direcao;
 extern uint32_t voltas;
+extern uint8_t interrupcao;
 
 unsigned char* progress_string(int val, int max);
 void step_motor(void){
@@ -30,7 +31,7 @@ void rotate_step_motor(){
 	velocidade=='1'?EnviarString("\n\rVelocidade: passo completo"):EnviarString("\n\rVelocidade: meio passo");
 	direcao=='1'?EnviarString("\n\rDirecao: anti-horario"):EnviarString("\n\rDirecao: horario");
 	EnviarString("\n\rIniciando voltas...");
-	for(int k = (int) voltas; k > 0; k--){
+	for(int k = (int) voltas; k > 0 && interrupcao == 0; k--){
 		int angle;
 		int volta =(int) voltas - k + 1;
 		char volta_char[3] = {0};
@@ -38,10 +39,9 @@ void rotate_step_motor(){
 		EnviarString("\n\rVolta: ");
 		EnviarString((unsigned char*) volta_char);
 		EnviarString("\n\r");
-
-		for(int i = 0; i < 512; i++){
+		
+		for(int i = 0; i < 512 && interrupcao == 0; i++){
 			EnviarString(progress_string(i, 512));
-
 			angle = i/64;
 			leds = 0;
 			if (direcao == '0')
@@ -134,7 +134,7 @@ void rotate_step_motor(){
 					SysTick_Wait1ms(10);
 				}
 			}
-		}
+		} 
 		EnviarString("\r                                                                         \r");                                                           
 	}
 	leds = 0;

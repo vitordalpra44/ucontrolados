@@ -17,12 +17,9 @@
 #define GPIO_PORTP (1<<13)
 #define GPIO_PORTB (1<<1)
 
-
-
-
-
 extern uint8_t leds;
 extern uint8_t pisca;
+extern int interrupcao;
 void SysTick_Wait1ms(uint32_t delay);
 
 // -------------------------------------------------------------------------------
@@ -74,7 +71,7 @@ void GPIO_Init(void)
 	GPIO_PORTB_AHB_AFSEL_R = 0x0;
 	
 	// 6. Setar os bits de DEN para habilitar I/O digital	
-	GPIO_PORTJ_AHB_DEN_R = 0x03;   //Bit0 e bit1
+	GPIO_PORTJ_AHB_DEN_R = 0x01;   //Bit0
 	GPIO_PORTN_DEN_R = 0x03; 		   //Bit0 e bit1
 	GPIO_PORTA_AHB_DEN_R = 0xFF;
 	GPIO_PORTQ_DEN_R = 0xF;
@@ -86,7 +83,16 @@ void GPIO_Init(void)
 	GPIO_PORTB_AHB_DATA_R = 0;
 	
 	// 7. Habilitar resistor de pull-up interno, setar PUR para 1
-	GPIO_PORTJ_AHB_PUR_R = 0x03;   //Bit0 e bit1	
+	GPIO_PORTJ_AHB_PUR_R = 0x01;   //Bit0
+
+	GPIO_PORTJ_AHB_IM_R = 0x0;
+	GPIO_PORTJ_AHB_IS_R = 0x0;
+	GPIO_PORTJ_AHB_IBE_R = 0x0;
+	GPIO_PORTJ_AHB_IEV_R = 0x0;
+	GPIO_PORTJ_AHB_ICR_R = 0x1;
+	GPIO_PORTJ_AHB_IM_R = 0x1;
+	NVIC_EN1_R = 0x1 << 19;
+	NVIC_PRI12_R = 5 << 29;
 
 }	
 
@@ -95,9 +101,14 @@ void GPIO_Init(void)
 // Lê os valores de entrada do port J
 // Parâmetro de entrada: Não tem
 // Parâmetro de saída: o valor da leitura do port
-uint32_t PortJ_Input(void)
-{
-	return GPIO_PORTJ_AHB_DATA_R;
+//uint32_t PortJ_Input(void)
+//{
+//	return GPIO_PORTJ_AHB_DATA_R;
+//}
+
+void GPIOPortJ_Handler(void){
+	interrupcao = 1;
+	GPIO_PORTJ_AHB_ICR_R = 0x1;
 }
 
 void acenderLeds(uint8_t leds){

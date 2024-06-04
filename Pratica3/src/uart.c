@@ -27,7 +27,7 @@ void UART_Init(void)
 	UART0_CTL_R = 0;
 	UART0_IBRD_R = 43;
 	UART0_FBRD_R 	= 25;
-	UART0_LCRH_R = 0x78;
+	UART0_LCRH_R = 0x7E;
 	UART0_CC_R = 0;
 	UART0_CTL_R = 0x301;
 		

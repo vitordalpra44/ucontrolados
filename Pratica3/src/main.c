@@ -55,10 +55,9 @@ uint8_t pisca = 0;
 uint32_t velocidade = '1';
 uint32_t direcao = '0';
 uint32_t voltas = 1;
-
+int interrupcao = 0;
 int8_t verificaDec(uint32_t dec) {return (dec == '0' || dec == '1' || dec == '2' || dec == '3' || dec == '4' || dec == '5' ||dec == '6' || dec == '7' ||dec == '8' || dec == '9');}
-
-
+	
 int main(void)
 {
 	PLL_Init();
@@ -67,74 +66,76 @@ int main(void)
 	UART_Init();
 	init_periodic_timer_0(sec_2_clocks(0.1));
 	uint32_t retcode = 0, retcode2=0;
+	unsigned char character = '*';
 	unsigned char buffer[200] = {0};
-
-	while (1)
-	{	
-		EnviarString(loop_principal);
-		Recepcao(&retcode);
-		EnviarString(dividir_secao);
-		if (retcode == '1'){
-			snprintf((char *) buffer, 200, "\n\rVelocidade: %c\n\rVoltas: %d\n\rDirecao: %c", velocidade, voltas, direcao);
-			EnviarString(buffer);		
-			memset(buffer, 0, 200);
-			
-		}else if (retcode == '2'){
-			EnviarString(setar_velocidade);
+	while(1){
+		while(character == '*'){
+			EnviarString(loop_principal);
 			Recepcao(&retcode);
-			if (retcode == '0') velocidade = '0';
-			else if (retcode == '1') velocidade = '1';
-			else{ 
-				EnviarString(escolha_errada);
-				continue;
-			}
-			EnviarString("\n\rValor alterado com sucesso");
-
-		}else if (retcode == '3'){
-			EnviarString(setar_direcao);
-			Recepcao(&retcode);
-			if (retcode == '0') direcao = '0';
-			else if (retcode == '1') direcao = '1';
-			else{ 
-				EnviarString(escolha_errada);
-				continue;
-			}
-			EnviarString("\n\rValor alterado com sucesso");
-		}else if (retcode == '4'){
-			char voltas_char[2] = {0};
-				EnviarString(setar_voltas);
+			EnviarString(dividir_secao);
+			interrupcao = 0;
+			if (retcode == '1'){
+				snprintf((char *) buffer, 200, "\n\rVelocidade: %c\n\rVoltas: %d\n\rDirecao: %c", velocidade, voltas, direcao);
+				EnviarString(buffer);		
+				memset(buffer, 0, 200);
+				
+			}else if (retcode == '2'){
+				EnviarString(setar_velocidade);
 				Recepcao(&retcode);
-				if ((!verificaDec(retcode))){
-						EnviarString(escolha_errada);
-						goto final;
-				}
-				voltas_char[0] = retcode;
-				Recepcao(&retcode2);
-				if ((!verificaDec(retcode2)) && retcode2 != 13){
-						EnviarString(escolha_errada);
-						goto final;
-				}else if (verificaDec(retcode2)){
-						voltas_char[1] = retcode2;
-				}
-				voltas = atoi(voltas_char);
-				if (voltas > 10){
-					voltas = 10;
-					EnviarString("\n\rSetando voltas para 10");
-				}else if (voltas == 0){
-					voltas = 1;
-					EnviarString("\n\rSetando voltas para 1");
+				if (retcode == '0') velocidade = '0';
+				else if (retcode == '1') velocidade = '1';
+				else{ 
+					EnviarString(escolha_errada);
+					continue;
 				}
 				EnviarString("\n\rValor alterado com sucesso");
 
+			}else if (retcode == '3'){
+				EnviarString(setar_direcao);
+				Recepcao(&retcode);
+				if (retcode == '0') direcao = '0';
+				else if (retcode == '1') direcao = '1';
+				else{ 
+					EnviarString(escolha_errada);
+					continue;
+				}
+				EnviarString("\n\rValor alterado com sucesso");
+			}else if (retcode == '4'){
+				char voltas_char[2] = {0};
+					EnviarString(setar_voltas);
+					Recepcao(&retcode);
+					if ((!verificaDec(retcode))){
+							EnviarString(escolha_errada);
+							goto final;
+					}
+					voltas_char[0] = retcode;
+					Recepcao(&retcode2);
+					if ((!verificaDec(retcode2)) && retcode2 != 13){
+							EnviarString(escolha_errada);
+							goto final;
+					}else if (verificaDec(retcode2)){
+							voltas_char[1] = retcode2;
+					}
+					voltas = atoi(voltas_char);
+					if (voltas > 10){
+						voltas = 10;
+						EnviarString("\n\rSetando voltas para 10");
+					}else if (voltas == 0){
+						voltas = 1;
+						EnviarString("\n\rSetando voltas para 1");
+					}
+					EnviarString("\n\rValor alterado com sucesso");
 
-
-		}else if (retcode == '5'){
-				rotate_step_motor();
-				EnviarString("\n\rFIM");
-		}else{
-			EnviarString(escolha_errada);
-
+			}else if (retcode == '5'){
+					rotate_step_motor();
+					EnviarString("\n\rFIM ");
+					character = 0;
+			}else{
+				EnviarString(escolha_errada);
+			}
 		}
+		EnviarString("\n\rDigite * para reiniciar");
+		Recepcao(&character);
 		final:
 		EnviarString("\n\r\n\r");
 	}
