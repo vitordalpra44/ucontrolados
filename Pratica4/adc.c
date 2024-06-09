@@ -6,28 +6,28 @@
 
 
 // -------------------------------------------------------------------------------
-// FunÁ„o setupADC
-// Inicializa o port E4 como um conversor analÛgico digital
-// Par‚metro de entrada: N„o tem
-// Par‚metro de saÌda: N„o tem
+// Fun√ß√£o setupADC
+// Inicializa o port E4 como um conversor anal√≥gico digital
+// Par√¢metro de entrada: N√£o tem
+// Par√¢metro de sa√≠da: N√£o tem
 void setupADC(void)
 {
 	//SETUP DO PINO E4
 	//1a. Ativar o clock para a porta setando o bit correspondente no registrador RCGCGPIO
 	SYSCTL_RCGCGPIO_R |= (GPIO_PORTE);
-	//1b.   apÛs isso verificar no PRGPIO se a porta est· pronta para uso.
-  while((SYSCTL_PRGPIO_R & (GPIO_PORTE) ) != (GPIO_PORTE) ){};
+	//1b.   ap√≥s isso verificar no PRGPIO se a porta est√° pronta para uso.
+        while((SYSCTL_PRGPIO_R & (GPIO_PORTE) ) != (GPIO_PORTE) ){};
 	
-	// 2. Limpar o AMSEL para desabilitar a analÛgica
+	// 2. Limpar o AMSEL para desabilitar a anal√≥gica
 	GPIO_PORTE_AHB_AMSEL_R |= 0x10;
 		
 	// 3. Limpar PCTL para selecionar o GPIO
 	GPIO_PORTE_AHB_PCTL_R &= ~0xF0000;
 
-	// 4. DIR para 0 se for entrada, 1 se for saÌda
+	// 4. DIR para 0 se for entrada, 1 se for sa√≠da
 	GPIO_PORTE_AHB_DIR_R &= ~0x10;
 
-	// 5. Limpar os bits AFSEL para 0 para selecionar GPIO sem funÁ„o alternativa	
+	// 5. Limpar os bits AFSEL para 0 para selecionar GPIO sem fun√ß√£o alternativa	
 	GPIO_PORTE_AHB_AFSEL_R |= 0x10;
 		
 	// 6. Setar os bits de DEN para habilitar I/O digital	
@@ -49,10 +49,10 @@ void setupADC(void)
 
 }	
 
-//devolve saÌda de 12bits do ADC
+//devolve sa√≠da de 12bits do ADC
 int readADC()
 {
-	ADC0_PSSI_R = 0x1; //PEDE SS0 para comeÁar
+	ADC0_PSSI_R = 0x1; //PEDE SS0 para come√ßar
 	while((ADC0_RIS_R & 0x1)!=0x1){};
 	int result = ADC0_SSFIFO0_R; //Retira da fila a entrada da SS0
 	ADC0_ISC_R = 0x1; //CONFIRMA LEITURA da fila da SS0
