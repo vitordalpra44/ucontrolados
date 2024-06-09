@@ -1,0 +1,12 @@
+--cpu=Cortex-M4.fp.sp
+".\objects\adc.o"
+".\objects\pwm.o"
+".\objects\gpio.o"
+".\objects\main.o"
+".\objects\startup.o"
+".\objects\utils.o"
+".\objects\keyboard.o"
+--strict --scatter ".\Objects\pratica4.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\Listings\pratica4.map" -o .\Objects\pratica4.axf
