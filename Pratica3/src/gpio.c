@@ -23,18 +23,18 @@ extern int interrupcao;
 void SysTick_Wait1ms(uint32_t delay);
 
 // -------------------------------------------------------------------------------
-// Função GPIO_Init
+// Funï¿½ï¿½o GPIO_Init
 // Inicializa os ports J e N
-// Parâmetro de entrada: Não tem
-// Parâmetro de saída: Não tem
+// Parï¿½metro de entrada: Nï¿½o tem
+// Parï¿½metro de saï¿½da: Nï¿½o tem
 void GPIO_Init(void)
 {
 	//1a. Ativar o clock para a porta setando o bit correspondente no registrador RCGCGPIO
 	SYSCTL_RCGCGPIO_R = (GPIO_PORTJ | GPIO_PORTN | GPIO_PORTA | GPIO_PORTQ | GPIO_PORTH | GPIO_PORTB | GPIO_PORTP);
-	//1b.   após isso verificar no PRGPIO se a porta está pronta para uso.
+	//1b.   apï¿½s isso verificar no PRGPIO se a porta estï¿½ pronta para uso.
   while((SYSCTL_PRGPIO_R & (GPIO_PORTJ | GPIO_PORTN | GPIO_PORTA | GPIO_PORTQ | GPIO_PORTH | GPIO_PORTB | GPIO_PORTP) ) != (GPIO_PORTJ | GPIO_PORTN | GPIO_PORTA | GPIO_PORTQ | GPIO_PORTH | GPIO_PORTB | GPIO_PORTP));
 	
-	// 2. Limpar o AMSEL para desabilitar a analógica
+	// 2. Limpar o AMSEL para desabilitar a analï¿½gica
 	GPIO_PORTJ_AHB_AMSEL_R = 0x00;
 	GPIO_PORTN_AMSEL_R = 0x00;
 	GPIO_PORTA_AHB_AMSEL_R = 0x00;
@@ -53,7 +53,7 @@ void GPIO_Init(void)
 	GPIO_PORTP_PCTL_R = 0;
 	GPIO_PORTB_AHB_PCTL_R = 0x0;
 
-	// 4. DIR para 0 se for entrada, 1 se for saída
+	// 4. DIR para 0 se for entrada, 1 se for saï¿½da
 	GPIO_PORTJ_AHB_DIR_R = 0x00;
 	GPIO_PORTN_DIR_R = 0x03; //BIT0 | BIT1
 	GPIO_PORTA_AHB_DIR_R = 0xF0;
@@ -61,7 +61,7 @@ void GPIO_Init(void)
 	GPIO_PORTH_AHB_DIR_R = 0xF;
 	GPIO_PORTP_DIR_R = 0xFF;
 	GPIO_PORTB_AHB_DIR_R = 0xFF;
-	// 5. Limpar os bits AFSEL para 0 para selecionar GPIO sem função alternativa	
+	// 5. Limpar os bits AFSEL para 0 para selecionar GPIO sem funï¿½ï¿½o alternativa	
 	GPIO_PORTJ_AHB_AFSEL_R = 0x00;
 	GPIO_PORTN_AFSEL_R = 0x00; 
 	GPIO_PORTA_AHB_AFSEL_R = 0x3;
@@ -97,10 +97,10 @@ void GPIO_Init(void)
 }	
 
 // -------------------------------------------------------------------------------
-// Função PortJ_Input
-// Lê os valores de entrada do port J
-// Parâmetro de entrada: Não tem
-// Parâmetro de saída: o valor da leitura do port
+// Funï¿½ï¿½o PortJ_Input
+// Lï¿½ os valores de entrada do port J
+// Parï¿½metro de entrada: Nï¿½o tem
+// Parï¿½metro de saï¿½da: o valor da leitura do port
 //uint32_t PortJ_Input(void)
 //{
 //	return GPIO_PORTJ_AHB_DATA_R;
@@ -118,33 +118,33 @@ void acenderLeds(uint8_t leds){
 }
 
 // -------------------------------------------------------------------------------
-// Função PortN_Output
+// Funï¿½ï¿½o PortN_Output
 // Escreve os valores no port N
-// Parâmetro de entrada: Valor a ser escrito
-// Parâmetro de saída: não tem
+// Parï¿½metro de entrada: Valor a ser escrito
+// Parï¿½metro de saï¿½da: nï¿½o tem
 void PortN_Output(uint32_t valor)
 {
     uint32_t temp;
     //vamos zerar somente os bits menos significativos
-    //para uma escrita amigável nos bits 0 e 1
+    //para uma escrita amigï¿½vel nos bits 0 e 1
     temp = GPIO_PORTN_DATA_R & 0xFC;
-    //agora vamos fazer o OR com o valor recebido na função
+    //agora vamos fazer o OR com o valor recebido na funï¿½ï¿½o
     temp = temp | valor;
     GPIO_PORTN_DATA_R = temp; 
 }
 
 // -------------------------------------------------------------------------------
-// Função PortH_Output
+// Funï¿½ï¿½o PortH_Output
 // Escreve os valores no port H
-// Parâmetro de entrada: Valor a ser escrito
-// Parâmetro de saída: não tem
+// Parï¿½metro de entrada: Valor a ser escrito
+// Parï¿½metro de saï¿½da: nï¿½o tem
 void PortH_Output(uint32_t valor)
 {
     uint32_t temp;
     // vamos zerar somente os bits menos significativos
-    // para uma escrita amigável nos bits 0 e 1
+    // para uma escrita amigï¿½vel nos bits 0 e 1
     temp = GPIO_PORTH_AHB_DATA_R & 0x00;
-    // agora vamos fazer o OR com o valor recebido na função
+    // agora vamos fazer o OR com o valor recebido na funï¿½ï¿½o
     temp = temp | valor;
     GPIO_PORTH_AHB_DATA_R = temp;
 }
@@ -162,7 +162,7 @@ void Timer0A_Handler(){
 }
 
 uint32_t sec_2_clocks(float seg){
-    uint32_t clocks_per_sec = 80000000;	// 80 MHz, ajustado para a sua configuração de clock
+    uint32_t clocks_per_sec = 80000000;	// 80 MHz, ajustado para a sua configuraï¿½ï¿½o de clock
     uint32_t clocks = clocks_per_sec * seg;
     return clocks;
 }

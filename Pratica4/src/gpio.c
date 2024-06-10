@@ -15,14 +15,13 @@
 
 
 void SysTick_Wait1ms(uint32_t delay);
-void GPIO_Init();
 
 // -------------------------------------------------------------------------------
 // Função GPIO_Init
 // Inicializa os ports J e N
 // Parâmetro de entrada: Não tem
 // Parâmetro de saída: Não tem
-void GPIO_Init()
+void GPIO_Init(void)
 {
 	//1a. Ativar o clock para a porta setando o bit correspondente no registrador RCGCGPIO
 	SYSCTL_RCGCGPIO_R = (GPIO_PORTL | GPIO_PORTM | GPIO_PORTK);
