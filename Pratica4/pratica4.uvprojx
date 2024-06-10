@@ -324,7 +324,7 @@
             <PlainCh>0</PlainCh>
             <Ropi>0</Ropi>
             <Rwpi>0</Rwpi>
-            <wLevel>3</wLevel>
+            <wLevel>2</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>1</uC99>
@@ -431,14 +431,14 @@
               <FilePath>.\src\utils.s</FilePath>
             </File>
             <File>
-              <FileName>keyboard.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\keyboard.c</FilePath>
-            </File>
-            <File>
               <FileName>teste_led.c.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\src\teste_led.c.c</FilePath>
+            </File>
+            <File>
+              <FileName>keyboard.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\src\keyboard.s</FilePath>
             </File>
           </Files>
         </Group>

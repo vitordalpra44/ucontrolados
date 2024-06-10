@@ -5,6 +5,7 @@
 // Prof. Guilherme Peron
 
 #include <stdint.h>
+#define KEYBOARD_DIGIT (*((volatile uint32_t *)0x20000404))
 
 
 
@@ -12,7 +13,7 @@ void PLL_Init(void);
 void SysTick_Init(void);
 void SysTick_Wait1ms(uint32_t delay);
 void GPIO_Init(void);
-uint8_t Keyboard_Read(void);
+void Keyboard_Read(void);
 void GPIO_Init_LEDS(void);
 void acenderLeds(uint8_t leds);
 int main(void)
@@ -22,7 +23,8 @@ int main(void)
 	GPIO_Init();
 	GPIO_Init_LEDS();
 	while (1){
-			if (Keyboard_Read() == '1')
+			Keyboard_Read();
+			if (KEYBOARD_DIGIT == '1')
 				acenderLeds(1);
 				//se entrar funcionou
 

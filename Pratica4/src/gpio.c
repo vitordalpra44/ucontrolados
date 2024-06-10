@@ -14,6 +14,7 @@
 
 
 void SysTick_Wait1ms(uint32_t delay);
+void GPIO_Init(void);
 
 // -------------------------------------------------------------------------------
 // Função GPIO_Init
@@ -39,7 +40,8 @@ void GPIO_Init(void)
 
 	// 4. DIR para 0 se for entrada, 1 se for saída
 	GPIO_PORTL_DIR_R = 0; //BIT0 | BIT1
-	GPIO_PORTM_DIR_R = 0xFF;
+	GPIO_PORTM_DIR_R = 0x0;
+	
 	// 5. Limpar os bits AFSEL para 0 para selecionar GPIO sem função alternativa	
 	GPIO_PORTL_AFSEL_R = 0x00;
 	GPIO_PORTM_AFSEL_R = 0x00;
