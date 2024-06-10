@@ -26,6 +26,8 @@ int main(void)
 			Keyboard_Read();
 			if (KEYBOARD_DIGIT == '1')
 				acenderLeds(1);
+			else
+				acenderLeds(0);
 				//se entrar funcionou
 
 		

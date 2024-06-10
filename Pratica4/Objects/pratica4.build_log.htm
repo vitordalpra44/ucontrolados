@@ -30,27 +30,6 @@ Project File Date:  06/09/2024
 <h2>Output:</h2>
 *** Using Compiler 'V6.21', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Build target 'Target 1'
-src/main.c(33): warning: 'return' will never be executed [-Wunreachable-code-return]
-   33 |         return 0;
-      |                ^
-1 warning generated.
-compiling main.c...
-src/teste_led.c.c(34): warning: no previous prototype for function 'GPIO_Init_LEDS' [-Wmissing-prototypes]
-   34 | void GPIO_Init_LEDS(void)
-      |      ^
-src/teste_led.c.c(34): note: declare 'static' if the function is not intended to be used outside of this translation unit
-   34 | void GPIO_Init_LEDS(void)
-      | ^
-      | static 
-src/teste_led.c.c(76): warning: no previous prototype for function 'acenderLeds' [-Wmissing-prototypes]
-   76 | void acenderLeds(uint8_t leds){
-      |      ^
-src/teste_led.c.c(76): note: declare 'static' if the function is not intended to be used outside of this translation unit
-   76 | void acenderLeds(uint8_t leds){
-      | ^
-      | static 
-2 warnings generated.
-compiling teste_led.c.c...
 src/gpio.c(20): warning: invalid UTF-8 in comment [-Winvalid-utf8]
    20 | // Fun<E7><E3>o GPIO_Init
       |       ^
@@ -86,6 +65,27 @@ src/gpio.c(45): warning: invalid UTF-8 in comment [-Winvalid-utf8]
       |                                                                       ^
 11 warnings generated.
 compiling gpio.c...
+src/main.c(35): warning: 'return' will never be executed [-Wunreachable-code-return]
+   35 |         return 0;
+      |                ^
+1 warning generated.
+compiling main.c...
+src/teste_led.c.c(34): warning: no previous prototype for function 'GPIO_Init_LEDS' [-Wmissing-prototypes]
+   34 | void GPIO_Init_LEDS(void)
+      |      ^
+src/teste_led.c.c(34): note: declare 'static' if the function is not intended to be used outside of this translation unit
+   34 | void GPIO_Init_LEDS(void)
+      | ^
+      | static 
+src/teste_led.c.c(76): warning: no previous prototype for function 'acenderLeds' [-Wmissing-prototypes]
+   76 | void acenderLeds(uint8_t leds){
+      |      ^
+src/teste_led.c.c(76): note: declare 'static' if the function is not intended to be used outside of this translation unit
+   76 | void acenderLeds(uint8_t leds){
+      | ^
+      | static 
+2 warnings generated.
+compiling teste_led.c.c...
 src/adc.c(1): warning: In file included from...
 src/adc.h(6): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
     6 | int readADC();
@@ -267,7 +267,7 @@ src/pwm.c(81): note: declare 'static' if the function is not intended to be used
 36 warnings generated.
 compiling pwm.c...
 linking...
-Program Size: Code=2428 RO-data=16 RW-data=0 ZI-data=1128  
+Program Size: Code=2436 RO-data=16 RW-data=0 ZI-data=1128  
 ".\Objects\pratica4.axf" - 0 Error(s), 62 Warning(s).
 
 <h2>Software Packages used:</h2>
