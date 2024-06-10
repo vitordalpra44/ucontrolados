@@ -6,7 +6,8 @@
 ".\objects\startup.o"
 ".\objects\utils.o"
 ".\objects\teste_led.c.o"
-".\objects\keyboard.o"
+".\objects\keyboard_1.o"
+".\objects\lcd.o"
 --strict --scatter ".\Objects\pratica4.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

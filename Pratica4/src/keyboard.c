@@ -10,61 +10,42 @@ void SysTick_Wait1ms(uint32_t delay);
 #define ROW2_MASK   0x20
 #define ROW3_MASK   0x40
 #define ROW4_MASK   0x80
-#define KEYBOARD_DIGIT (*((volatile uint32_t *)0x20000404))
 
-void setColumnOutput(uint8_t col);
-uint8_t readRow(void);
-void debounce(uint32_t delay);
 uint8_t mapKey(uint8_t row, uint8_t col);
-uint8_t Keyboard_Read(void);
-uint8_t Keyboard_Read(void) {
-    uint8_t col, row = 0, key;
-    uint8_t columns[] = {ROW1_MASK, ROW2_MASK, ROW3_MASK, ROW4_MASK};
+uint8_t Keyboard_Read();
 
 
 
-    for (col = 0; col < 4; col++) {
-        // Configura a coluna como saída
-        setColumnOutput(columns[col]);
-        
-				SysTick_Wait1ms(5);
 
-        // Zera a coluna
-        GPIO_PORTM_DATA_R = 0x0;
+uint8_t Keyboard_Read() {
+	uint8_t col, row = 0, key = 0;
+	uint8_t columns[] = {ROW1_MASK, ROW2_MASK, ROW3_MASK, ROW4_MASK};
+	for (col = 0; col < 4; col++) {
+		// Configura a coluna como saída
+		GPIO_PORTM_DIR_R = columns[col];
+		
+		SysTick_Wait1ms(5);
 
-        // Lê as linhas
-        row = readRow();
+		// Zera a coluna
+		GPIO_PORTM_DATA_R = 0x0;
 
-        // Debounce
-        if (row != 0xF) {
-                      key = mapKey(row, col);
-                      SysTick_Wait1ms(500);
-                        if (mapKey(readRow(), col) == key)
-                            break;
+		// Lê as linhas
+		row = GPIO_PORTL_DATA_R & 0xF;
 
-        }
-
-       SysTick_Wait1ms(500);
-
-
-    }
-
-    // Restaura a configuração original
-    GPIO_PORTM_DIR_R &= ~ROW1_MASK & ~ROW2_MASK & ~ROW3_MASK & ~ROW4_MASK;
-        return key;
+		// Debounce
+		if (row != 0xF) {
+			key = mapKey(row, col);
+			SysTick_Wait1ms(500);
+				if (mapKey((GPIO_PORTL_DATA_R & 0xF), col) == key)
+						break;
+		}
+	}
+	// Restaura a configuração original
+	GPIO_PORTM_DIR_R &= ~ROW1_MASK & ~ROW2_MASK & ~ROW3_MASK & ~ROW4_MASK;
+	return key;
 }
 
-void setColumnOutput(uint8_t col) {
-    GPIO_PORTM_DIR_R = col;
-}
 
-uint8_t readRow(void) {
-    return GPIO_PORTL_DATA_R & 0xF;
-}
-
-void debounce(uint32_t delay) {
-    SysTick_Wait1ms(delay);
-}
 
 uint8_t mapKey(uint8_t row, uint8_t col) {
     static const char keyMap[4][4] = {

@@ -5,16 +5,20 @@
 // Prof. Guilherme Peron
 
 #include <stdint.h>
-#define KEYBOARD_DIGIT (*((volatile uint32_t *)0x20000404))
 
 
 
 void PLL_Init(void);
 void SysTick_Init(void);
 void SysTick_Wait1ms(uint32_t delay);
-void GPIO_Init(void);
-void Keyboard_Read(void);
-void GPIO_Init_LEDS(void);
+
+void imprimirString(const char* string);
+void limparLCD();
+void GPIO_Init();
+uint8_t Keyboard_Read();
+void GPIO_Init_LEDS();
+void LCD_Init();
+
 void acenderLeds(uint8_t leds);
 int main(void)
 {
@@ -22,16 +26,18 @@ int main(void)
 	SysTick_Init();
 	GPIO_Init();
 	GPIO_Init_LEDS();
+	LCD_Init();
+	
+	imprimirString("TESTANDO LCD");
+	
 	while (1){
-			Keyboard_Read();
-			if (KEYBOARD_DIGIT == '1')
+			uint8_t key = Keyboard_Read();
+			if (key == '1')
 				acenderLeds(1);
 			else
 				acenderLeds(0);
-				//se entrar funcionou
-
-		
-	}
+		}
+	
 	return 0;
 }
 
