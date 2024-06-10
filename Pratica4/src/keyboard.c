@@ -17,7 +17,7 @@ void debounce(uint32_t delay);
 uint8_t mapKey(uint8_t row, uint8_t col);
 uint8_t Keyboard_Read(void);
 uint8_t Keyboard_Read(void) {
-    uint8_t col, row, key, key_ret = 0;
+    uint8_t col, row = 0, key;
     uint8_t columns[] = {ROW1_MASK, ROW2_MASK, ROW3_MASK, ROW4_MASK};
     
 
@@ -37,23 +37,21 @@ uint8_t Keyboard_Read(void) {
 
         // Debounce
         if (row != 0xF) {
-            debounce(500);
-            row = readRow();
+					  key = mapKey(row, col);
+					  SysTick_Wait1ms(500);
+						if (mapKey(readRow(), col) == key)
+							break;
+						
         }
 
-        // Mapeia a tecla pressionada
-        key = mapKey(row, col);
+       SysTick_Wait1ms(500);
 
-        // Se uma tecla foi pressionada, armazena o valor
-        if (row != 0xF) {
-					key_ret = key;
-          break;
-        }
+
     }
 
     // Restaura a configuração original
     GPIO_PORTM_DIR_R &= ~ROW1_MASK & ~ROW2_MASK & ~ROW3_MASK & ~ROW4_MASK;
-		return key_ret;
+		return key;
 }
 
 void setColumnOutput(uint8_t col) {
