@@ -1,21 +1,35 @@
 Dependencies for Project 'pratica4', Target 'Target 1': (DO NOT MODIFY !)
-CompilerVersion: 6210000::V6.21::ARMCLANG
-F (.\src\adc.c)(0x6667A2EF)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O0 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-ID:/Keil/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129-D__UVISION_VERSION="539" -DTM4C1294NCPDT-o ./objects/adc.o -MD)
-I (C:\Keil_v5\ARM\ARMCLANG\include\stdint.hSrc\tm4c1294ncpdt.h)(0x00000000)
-F (.\src\adc.h)(0x6665EE69)()
-F (.\src\pwm.c)(0x6667A314)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O0 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-ID:/Keil/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129-D__UVISION_VERSION="539" -DTM4C1294NCPDT-o ./objects/pwm.o -MD)
-I (C:\Keil_v5\ARM\ARMCLANG\include\stdint.hSrc\tm4c1294ncpdt.h)(0x00000000)
-F (.\src\pwm.h)(0x6665EE69)()
-F (.\src\gpio.c)(0x6667A2F3)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O0 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-ID:/Keil/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129-D__UVISION_VERSION="539" -DTM4C1294NCPDT-o ./objects/gpio.o -MD)
-I (src\tm4c1294ncpdt.h)(0x666642E2)
-F (.\src\tm4c1294ncpdt.h)(0x666642E2)()
-F (.\src\main.c)(0x6667A2F7)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O0 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-ID:/Keil/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129-D__UVISION_VERSION="539" -DTM4C1294NCPDT-o ./objects/main.o -MD)
-I (src\tm4c1294ncpdt.h)(0x666642E2)
-F (.\src\startup.s)(0x6665F5F3)(--target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -masm=auto  -Wa,armasm,--diag_suppress=A1950W -c-gdwarf-4-ID:/Keil/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129-Wa,armasm,--pd,"__UVISION_VERSION SETA 539" -Wa,armasm,--pd,"TM4C1294NCPDT SETA 1"-o ./objects/startup.o)
-F (.\src\utils.s)(0x66676AF6)(--target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -masm=auto  -Wa,armasm,--diag_suppress=A1950W -c-gdwarf-4-ID:/Keil/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129-Wa,armasm,--pd,"__UVISION_VERSION SETA 539" -Wa,armasm,--pd,"TM4C1294NCPDT SETA 1"-o ./objects/utils.o)
-F (.\src\teste_led.c.c)(0x6667A308)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O0 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-ID:/Keil/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129-D__UVISION_VERSION="539" -DTM4C1294NCPDT-o ./objects/teste_led.c.o -MD)
-I (C:\Keil_v5\ARM\ARMCLANG\include\stdint.herc\tm4c1294ncpdt.h)(0x00000000)
-F (.\src\keyboard.c)(0x6667A318)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O0 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-ID:/Keil/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129-D__UVISION_VERSION="539" -DTM4C1294NCPDT-o ./objects/keyboard_1.o -MD)
-I (C:\Keil_v5\ARM\ARMCLANG\include\stdint.herc\tm4c1294ncpdt.h)(0x00000000)
-F (.\src\lcd.c)(0x6667A31F)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O0 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-ID:/Keil/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C129-D__UVISION_VERSION="539" -DTM4C1294NCPDT-o ./objects/lcd.o -MD)
-I (src\tm4c1294ncpdt.h\:\Keil_v5\ARM\ARMCLANG\include\string.h)(0x00000000)
+F (.\src\adc.c)(0x666848B4)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -W -O0 --apcs=interwork --split_sections-I C:\Users\DAELN\Desktop\ucontrolados-main\Pratica4\RTE-I C:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DTM4C1294NCPDT-o .\objects\adc.o --omf_browse .\objects\adc.crf --depend .\objects\adc.d)
+I (src\adc.h)(0x6667A333)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x569E76DA)
+I (src\tm4c1294ncpdt.h)(0x6667A333)
+F (.\src\adc.h)(0x6667A333)()
+F (.\src\pwm.c)(0x6667A333)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -W -O0 --apcs=interwork --split_sections-I C:\Users\DAELN\Desktop\ucontrolados-main\Pratica4\RTE-I C:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DTM4C1294NCPDT-o .\objects\pwm.o --omf_browse .\objects\pwm.crf --depend .\objects\pwm.d)
+I (src\pwm.h)(0x6667A333)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x569E76DA)
+I (src\tm4c1294ncpdt.h)(0x6667A333)
+F (.\src\pwm.h)(0x6667A333)()
+F (.\src\gpio.c)(0x6667A333)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -W -O0 --apcs=interwork --split_sections-I C:\Users\DAELN\Desktop\ucontrolados-main\Pratica4\RTE-I C:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DTM4C1294NCPDT-o .\objects\gpio.o --omf_browse .\objects\gpio.crf --depend .\objects\gpio.d)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x569E76DA)
+I (src\tm4c1294ncpdt.h)(0x6667A333)
+F (.\src\tm4c1294ncpdt.h)(0x6667A333)()
+F (.\src\main.c)(0x666853BD)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -W -O0 --apcs=interwork --split_sections-I C:\Users\DAELN\Desktop\ucontrolados-main\Pratica4\RTE-I C:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DTM4C1294NCPDT-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x569E76DA)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x569E76DA)
+I (src\adc.h)(0x6667A333)
+I (src\pwm.h)(0x6667A333)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x569E76DA)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x569E76DA)
+I (src\tm4c1294ncpdt.h)(0x6667A333)
+F (.\src\startup.s)(0x6667A333)(--cpu Cortex-M4.fp --pd "__EVAL SETA 1" -g --apcs=interwork -I C:\Users\DAELN\Desktop\ucontrolados-main\Pratica4\RTE-I C:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-I C:\Keil_v5\ARM\CMSIS\Include--pd "__UVISION_VERSION SETA 518" --pd "TM4C1294NCPDT SETA 1"--list .\listings\startup.lst --xref -o .\objects\startup.o --depend .\objects\startup.d)
+F (.\src\utils.s)(0x6667A333)(--cpu Cortex-M4.fp --pd "__EVAL SETA 1" -g --apcs=interwork -I C:\Users\DAELN\Desktop\ucontrolados-main\Pratica4\RTE-I C:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-I C:\Keil_v5\ARM\CMSIS\Include--pd "__UVISION_VERSION SETA 518" --pd "TM4C1294NCPDT SETA 1"--list .\listings\utils.lst --xref -o .\objects\utils.o --depend .\objects\utils.d)
+F (.\src\teste_led.c.c)(0x6667A333)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -W -O0 --apcs=interwork --split_sections-I C:\Users\DAELN\Desktop\ucontrolados-main\Pratica4\RTE-I C:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DTM4C1294NCPDT-o .\objects\teste_led.c.o --omf_browse .\objects\teste_led.c.crf --depend .\objects\teste_led.c.d)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x569E76DA)
+I (src\tm4c1294ncpdt.h)(0x6667A333)
+F (.\src\keyboard.c)(0x666843BC)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -W -O0 --apcs=interwork --split_sections-I C:\Users\DAELN\Desktop\ucontrolados-main\Pratica4\RTE-I C:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DTM4C1294NCPDT-o .\objects\keyboard.o --omf_browse .\objects\keyboard.crf --depend .\objects\keyboard.d)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x569E76DA)
+I (src\tm4c1294ncpdt.h)(0x6667A333)
+F (.\src\lcd.c)(0x6667A333)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -W -O0 --apcs=interwork --split_sections-I C:\Users\DAELN\Desktop\ucontrolados-main\Pratica4\RTE-I C:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DTM4C1294NCPDT-o .\objects\lcd.o --omf_browse .\objects\lcd.crf --depend .\objects\lcd.d)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x569E76DA)
+I (src\tm4c1294ncpdt.h)(0x6667A333)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x569E76DA)

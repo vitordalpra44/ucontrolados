@@ -8,10 +8,10 @@ void SysTick_Wait1ms(uint32_t delay);
 
 // Definições para o estado das linhas e colunas
 #define COL_MASK    0x0F
-#define ROW1_MASK   0x10
-#define ROW2_MASK   0x20
-#define ROW3_MASK   0x40
-#define ROW4_MASK   0x80
+#define ROW1_MASK   0x17
+#define ROW2_MASK   0x27
+#define ROW3_MASK   0x47
+#define ROW4_MASK   0x87
 
 uint8_t mapKey(uint8_t row, uint8_t col);
 uint8_t Keyboard_Read();
@@ -29,7 +29,7 @@ uint8_t Keyboard_Read() {
 		SysTick_Wait1ms(5);
 
 		// Zera a coluna
-		GPIO_PORTM_DATA_R = 0x0;
+		GPIO_PORTM_DATA_R &= 0xF;
 
 		// Lê as linhas
 		row = GPIO_PORTL_DATA_R & 0xF;
@@ -43,7 +43,7 @@ uint8_t Keyboard_Read() {
 		}
 	}
 	// Restaura a configuração original
-	GPIO_PORTM_DIR_R &= ~ROW1_MASK & ~ROW2_MASK & ~ROW3_MASK & ~ROW4_MASK;
+	GPIO_PORTM_DIR_R = 0xF;
 	return key;
 }
 
@@ -58,10 +58,10 @@ uint8_t mapKey(uint8_t row, uint8_t col) {
     };
 
     switch (row) {
-        case 0xE: return keyMap[col][0];
-        case 0xD: return keyMap[col][1];
-        case 0xB: return keyMap[col][2];
-        case 0x7: return keyMap[col][3];
+        case 0xE: return keyMap[0][col];
+        case 0xD: return keyMap[1][col];
+        case 0xB: return keyMap[2][col];
+        case 0x7: return keyMap[3][col];
         default: return 0;
     }
 }

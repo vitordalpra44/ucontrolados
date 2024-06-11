@@ -1,9 +1,7 @@
 #include "adc.h"
 
-#ifndef TM4
-#define TM4
+
 #include "tm4c1294ncpdt.h"
-#endif
 
 #define GPIO_PORTE (0x10)
 
