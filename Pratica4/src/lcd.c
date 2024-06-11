@@ -1,5 +1,8 @@
 #include <stdint.h>
+#ifndef TM4
+#define TM4
 #include "tm4c1294ncpdt.h"
+#endif
 #include <string.h>
 // Protótipos de funções
 void SysTick_Wait1us(uint32_t delay);

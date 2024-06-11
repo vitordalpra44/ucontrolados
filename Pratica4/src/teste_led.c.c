@@ -5,7 +5,10 @@
 // Prof. Guilherme Peron
 
 #include <stdint.h>
+#ifndef TM4
+#define TM4
 #include "tm4c1294ncpdt.h"
+#endif
 
 
 // gpio.c
@@ -13,13 +16,7 @@
 // Inicializa as portas J e N
 // Prof. Guilherme Peron
 
-
-#include <stdint.h>
-
-#include "tm4c1294ncpdt.h"
-
-  
-
+ 
 #define GPIO_PORTQ (0x4000)
 #define GPIO_PORTP (1<<13)
 #define GPIO_PORTB (1<<1)

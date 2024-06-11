@@ -1,6 +1,8 @@
 #include <stdint.h>
+#ifndef TM4
+#define TM4
 #include "tm4c1294ncpdt.h"
-
+#endif
 
 void SysTick_Wait1ms(uint32_t delay);
 

@@ -1,5 +1,8 @@
 #include "pwm.h"
+#ifndef TM4
+#define TM4
 #include "tm4c1294ncpdt.h"
+#endif
 #define CLK 80000000
 #define GPIO_PORTF (0x20) 
 #define GPIO_PORTE (0x10)
